@@ -657,6 +657,68 @@
   }
   .next-item .ni-icon { font-size: 1.5rem; margin-bottom: 8px; display: block; }
 
+  /* Ciclo 2 oculto até feedback na wiki */
+  .ciclo-2-oculto { display: none !important; }
+
+  /* ── COMENTÁRIOS WIKI · CICLO 1 ── */
+  .wiki-cycle-notice {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 1px solid #fdba74;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #9a3412;
+  }
+  .wiki-cycle-notice strong { color: #7c2d12; }
+  .wiki-subtitle {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--pink-dark);
+    margin: 32px 0 14px;
+  }
+  .wiki-subtitle:first-of-type { margin-top: 8px; }
+  .wiki-slots-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .wiki-slot {
+    min-height: 140px;
+    padding: 16px 18px;
+    background: var(--gray-light);
+    border: 2px dashed var(--gray-mid);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .wiki-slot-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--dark);
+  }
+  .wiki-slot-body {
+    flex: 1;
+    font-size: 0.84rem;
+    color: var(--gray);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .our-duo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .wiki-slots-grid, .our-duo-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--dark);
@@ -705,9 +767,9 @@
     <li><a href="#persona">Persona</a></li>
     <li><a href="#diagnostico">Diagnóstico</a></li>
     <li><a href="#telas">Telas</a></li>
-    <li><a href="#prototipos">Protótipos</a></li>
     <li><a href="#criterios">Critérios</a></li>
     <li><a href="#compatibilidade">Compatibilidade</a></li>
+    <li><a href="#comentarios-wiki-c1">Comentários · Ciclo 1</a></li>
   </ul>
 </nav>
 
@@ -741,7 +803,7 @@
 
     <div class="section-label">
       <span class="cycle-badge">CICLO 1</span>
-      <span class="section-num">01 · Contexto e Diagnóstico Inicial</span>
+      <span class="section-num">1.1–1.2 · Sistema e público-alvo</span>
     </div>
 
     <h2 class="section-title">1.1 Sistema <span>Escolhido</span></h2>
@@ -795,9 +857,10 @@
 <section id="persona">
   <div class="container">
     <div class="section-label">
-      <span class="section-num">1.2.1 · Persona</span>
+      <span class="cycle-badge">CICLO 1</span>
+      <span class="section-num">1.3 · Persona</span>
     </div>
-    <h2 class="section-title">A usuária <span>representativa</span></h2>
+    <h2 class="section-title">1.3 A usuária <span>representativa</span></h2>
 
     <div class="persona-wrap">
       <div class="persona-sidebar">
@@ -853,9 +916,10 @@
 <section id="diagnostico">
   <div class="container">
     <div class="section-label">
-      <span class="section-num">1.3 · Diagnóstico</span>
+      <span class="cycle-badge">CICLO 1</span>
+      <span class="section-num">1.4 · Diagnóstico heurístico</span>
     </div>
-    <h2 class="section-title">Avaliação <span>Heurística</span></h2>
+    <h2 class="section-title">1.4 Avaliação <span>Heurística</span></h2>
     <p class="section-desc">
       Com base nas 10 Heurísticas de Nielsen e nos critérios 3.3, 3.5 e 3.8, identificamos 4 problemas no fluxo de conclusão de compra.
     </p>
@@ -988,11 +1052,12 @@
 <section id="telas">
   <div class="container">
     <div class="section-label">
-      <span class="section-num">1.4 · Telas Originais</span>
+      <span class="cycle-badge">CICLO 1</span>
+      <span class="section-num">1.5 · Telas originais (prints)</span>
     </div>
-    <h2 class="section-title">Evidências nos <span>Prints</span></h2>
+    <h2 class="section-title">1.5 Evidências nos <span>Prints</span></h2>
     <p class="section-desc">
-      Os prints do aplicativo estão vinculados como arquivos na pasta <code>imagens/</code> (<code>print-tela-01.png</code> … <code>print-tela-04.png</code> — ajuste os <code>src</code> no HTML se necessário).
+      Os prints estão na mesma pasta deste documento: <code>13.png</code>, <code>14.png</code> e <code>15.png</code> (carrinho/checkout, etapas do fluxo e confirmação).
     </p>
 
     <div class="screens-grid">
@@ -1008,7 +1073,7 @@
           <div class="screen-url">shein.com.br · Carrinho / Checkout</div>
         </div>
         <div class="screen-img-area">
-          <img src="imagens/print-tela-01.png" alt="Print do carrinho com botão Continuar Compra">
+          <img src="13.png" alt="Print do carrinho com botão Continuar Compra">
         </div>
         <div class="screen-footer">
           <div class="screen-name">TELA 01 · Carrinho com botão "Continuar Compra"</div>
@@ -1030,7 +1095,7 @@
           <div class="screen-url">shein.com.br · Etapas do Checkout</div>
         </div>
         <div class="screen-img-area">
-          <img src="imagens/print-tela-02.png" alt="Print das etapas gamificadas do checkout">
+          <img src="14.png" alt="Print das etapas gamificadas do checkout">
         </div>
         <div class="screen-footer">
           <div class="screen-name">TELA 02 · Jornada gamificada do checkout</div>
@@ -1052,7 +1117,7 @@
           <div class="screen-url">shein.com.br · Confirmação / Finalização</div>
         </div>
         <div class="screen-img-area">
-          <img src="imagens/print-tela-03.png" alt="Print da tela de confirmação ou finalização do pedido">
+          <img src="15.png" alt="Print da tela de confirmação ou finalização do pedido">
         </div>
         <div class="screen-footer">
           <div class="screen-name">TELA 03 · Confirmação / Finalização do Pedido</div>
@@ -1063,40 +1128,190 @@
         </div>
       </div>
 
-      <!-- TELA 04 -->
-      <div class="screen-card">
-        <div class="screen-header">
-          <div class="screen-dots">
-            <div class="screen-dot r"></div>
-            <div class="screen-dot y"></div>
-            <div class="screen-dot g"></div>
-          </div>
-          <div class="screen-url">shein.com.br · Extra / Detalhe</div>
-        </div>
-        <div class="screen-img-area">
-          <img src="imagens/print-tela-04.png" alt="Print adicional — pagamento, cupons ou gamificação">
-        </div>
-        <div class="screen-footer">
-          <div class="screen-name">TELA 04 · Detalhe Adicional (Pagamento / Gamificação)</div>
-          <div class="problem-tags">
-            <div class="ptag"><span class="ptag-badge">P3</span> Elementos gamificados no checkout</div>
-            <div class="ptag"><span class="ptag-badge">P2</span> Visibilidade de ações secundárias</div>
-          </div>
-        </div>
-      </div>
-
     </div><!-- /screens-grid -->
   </div>
 </section>
 
+<!-- CRITÉRIOS 3.3, 3.5, 3.8 · CICLO 1 -->
+<section id="criterios">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge">CICLO 1</span>
+      <span class="section-num">1.6 · Critérios 3.3, 3.5 e 3.8</span>
+    </div>
+    <h2 class="section-title">1.6 Controle explícito, gestão de erros e <span>Adaptabilidade</span></h2>
+    <p class="section-desc">
+      Os problemas identificados impactam diretamente os critérios de usabilidade de controle explícito (3.3), gestão de erros (3.5) e adaptabilidade (3.8) no fluxo de conclusão de compra.
+    </p>
+
+    <div class="criteria-cards">
+      <!-- 3.3 -->
+      <div class="crit-card">
+        <div class="crit-header">
+          <div class="crit-num">3.3</div>
+          <div class="crit-title">Controle Explícito</div>
+        </div>
+        <div class="crit-body">
+          O botão <strong>"Continuar Compra"</strong> não deixa claro se representa apenas um avanço no fluxo ou se está efetivamente
+          <strong>concluindo ou gerando o pedido</strong>. Ao não comunicar explicitamente o momento de compromisso final, o sistema reduz o senso de controle do usuário.
+          Para Ana (persona), isso significa tomar uma decisão importante (como confirmar um pedido com cobrança) sem ter perfeita consciência das consequências,
+          violando o princípio de que ações críticas devem ser claramente anunciadas e confirmadas.
+        </div>
+      </div>
+
+      <!-- 3.5 -->
+      <div class="crit-card">
+        <div class="crit-header">
+          <div class="crit-num">3.5</div>
+          <div class="crit-title">Gestão de Erros</div>
+        </div>
+        <div class="crit-body">
+          A gestão de erros é prejudicada pela <strong>ausência de uma tela clara de revisão do pedido</strong> e pela
+          <strong>baixa visibilidade de ações de cancelar/voltar</strong>. O usuário tem pouca oportunidade de detectar e corrigir
+          erros de endereço, quantidade ou método de pagamento antes da conclusão. Na prática, o sistema empurra o usuário para a finalização
+          sem oferecer mecanismos eficientes de recuperação, transferindo o esforço de correção para processos posteriores
+          (cancelamento, estorno, contato com suporte).
+        </div>
+      </div>
+
+      <!-- 3.8 -->
+      <div class="crit-card">
+        <div class="crit-header">
+          <div class="crit-num">3.8</div>
+          <div class="crit-title">Adaptabilidade</div>
+        </div>
+        <div class="crit-body">
+          A jornada de compra gamificada pode ser interessante para usuários que gostam de explorar cupons e pontos, mas
+          <strong>não se adapta</strong> a quem precisa de uma experiência de compra rápida e previsível. Falta um modo de
+          <strong>checkout simplificado</strong> que reduza distrações, minimize a chance de erros por pressa e respeite padrões
+          familiarizados de outros e-commerces. A interface trata todos os usuários da mesma forma, sem considerar diferentes níveis de
+          experiência, objetivos e contextos de uso (por exemplo, compras rápidas no transporte público).
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPATIBILIDADE · CICLO 1 -->
+<section id="compatibilidade">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge">CICLO 1</span>
+      <span class="section-num">1.7 · Compatibilidade com o modelo de compra (BR)</span>
+    </div>
+    <h2 class="section-title">1.7 Compatibilidade com o <span>Modelo de Compra</span> no Brasil</h2>
+    <p class="section-desc">
+      No contexto brasileiro, usuários estão acostumados a um fluxo de compra relativamente padronizado. A Shein se afasta desse padrão ao não oferecer uma etapa de revisão clara entre o carrinho e a finalização do pedido.
+    </p>
+
+    <table class="compat-table">
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Padrão Comum no Brasil</th>
+          <th>Fluxo Observado na Shein</th>
+          <th>Compatibilidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Carrinho</td>
+          <td>Listagem de itens → botão <strong>"Avançar"</strong></td>
+          <td>Listagem de itens → botão <strong>"Continuar Compra"</strong></td>
+          <td class="status-ok"><span>✔</span><span>Rótulo similar, porém sem aviso sobre impacto da próxima etapa</span></td>
+        </tr>
+        <tr>
+          <td>Revisão</td>
+          <td>Revisão de itens, valores, frete, endereço → botão <strong>"Avançar"</strong></td>
+          <td><em>Etapa de revisão pouco clara ou inexistente após "Continuar Compra"</em></td>
+          <td class="status-fail"><span>✖</span><span>Usuário não identifica momento de conferir tudo antes de finalizar</span></td>
+        </tr>
+        <tr>
+          <td>Pagamento</td>
+          <td>Escolha de método de pagamento → botão <strong>"Finalizar Pedido"</strong></td>
+          <td>Seleção de pagamento seguida de confirmação pouco destacada do fim da compra</td>
+          <td class="status-fail"><span>✖</span><span>Momento de compromisso final não é claramente diferenciado</span></td>
+        </tr>
+        <tr>
+          <td>Confirmação</td>
+          <td>Tela final apenas informativa (número do pedido, resumo)</td>
+          <td>Tela de confirmação após ações interpretadas como simples "avanços"</td>
+          <td class="status-fail"><span>✖</span><span>Usuário sente que "o pedido fechou sozinho" após clicar em "Continuar Compra"</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="section-desc" style="margin-top:24px;">
+      Em resumo, o rótulo <strong>"Continuar Compra"</strong> não corresponde ao que grande parte dos usuários brasileiros espera: um simples avanço
+      até a revisão do pedido. A ausência dessa etapa intermediária compromete a compatibilidade com o modelo mental local,
+      aumentando a probabilidade de erros e a sensação de perda de controle sobre a compra.
+    </p>
+  </div>
+</section>
+
+<!-- COMENTÁRIOS WIKI · encerramento do CICLO 1 -->
+<section id="comentarios-wiki-c1">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge">CICLO 1</span>
+      <span class="section-num">1.8 · Comentários na wiki (encerramento do Ciclo 1)</span>
+    </div>
+    <h2 class="section-title">1.8 Comentários sobre o <span>Ciclo 1</span></h2>
+
+    <div class="wiki-cycle-notice" role="status">
+      <strong>Ciclo 2 em construção.</strong>
+      O conteúdo de prototipação e próximos passos do Ciclo 2 permanece oculto nesta página até incorporarmos o retorno da wiki.
+      Estamos <strong>aguardando os comentários dos colegas</strong> (outras duplas) na wiki antes de abrir aqui a secção do Ciclo 2.
+    </div>
+
+    <p class="section-desc">
+      Esta secção encerra o <strong>Ciclo 1</strong> no documento: após a rodada na wiki, registre aqui as <strong>perspectivas de outras duplas</strong>
+      (quatro comentários — duas duplas, dois integrantes cada) e os <strong>comentários da nossa dupla</strong> (Luís Antônio e Ivy) sobre o Ciclo 1.
+    </p>
+
+    <h3 class="wiki-subtitle">Duas duplas colegas — perspectivas sobre o nosso Ciclo 1 (4 comentários)</h3>
+    <div class="wiki-slots-grid">
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Dupla colega A · integrante 1</span>
+        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Dupla colega A · integrante 2</span>
+        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Dupla colega B · integrante 1</span>
+        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Dupla colega B · integrante 2</span>
+        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+      </div>
+    </div>
+
+    <h3 class="wiki-subtitle">Nossa dupla — reflexão sobre o Ciclo 1</h3>
+    <div class="our-duo-grid">
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Luís Antônio</span>
+        <p class="wiki-slot-body">Inserir aqui o seu comentário sobre o Ciclo 1.</p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Ivy</span>
+        <p class="wiki-slot-body">Inserir aqui o comentário da Ivy sobre o Ciclo 1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— Ciclo 2 (conteúdo preparado; oculto na página) ——— -->
 <!-- PROTÓTIPOS -->
-<section id="prototipos">
+<section id="prototipos" class="ciclo-2-oculto" aria-hidden="true">
   <div class="container">
     <div class="section-label">
       <span class="cycle-badge">CICLO 2</span>
-      <span class="section-num">Em Construção · Prototipação e Redesign</span>
+      <span class="section-num">2.1 · Protótipos de redesign (em construção)</span>
     </div>
-    <h2 class="section-title">Protótipos de <span>Redesign</span></h2>
+    <h2 class="section-title">2.1 Protótipos de <span>Redesign</span></h2>
     <p class="section-desc">
       Os protótipos de redesign estão vinculados como arquivos de imagem na pasta <code>imagens/</code> (edite os caminhos <code>src</code> no HTML se usar outros nomes de arquivo).
     </p>
@@ -1151,129 +1366,15 @@
   </div>
 </section>
 
-  <!-- CRITÉRIOS 3.3, 3.5, 3.8 -->
-  <section id="criterios">
+<!-- PRÓXIMOS PASSOS (Ciclo 2 — oculto até feedback na wiki) -->
+<section id="proximos" class="ciclo-2-oculto" aria-hidden="true">
     <div class="container">
       <div class="section-label">
-        <span class="section-num">4.2 · Critérios 3.3, 3.5 e 3.8</span>
-      </div>
-      <h2 class="section-title">Controle Explícito, Gestão de Erros e <span>Adaptabilidade</span></h2>
-      <p class="section-desc">
-        Os problemas identificados impactam diretamente os critérios de usabilidade de controle explícito (3.3), gestão de erros (3.5) e adaptabilidade (3.8) no fluxo de conclusão de compra.
-      </p>
-  
-      <div class="criteria-cards">
-        <!-- 3.3 -->
-        <div class="crit-card">
-          <div class="crit-header">
-            <div class="crit-num">3.3</div>
-            <div class="crit-title">Controle Explícito</div>
-          </div>
-          <div class="crit-body">
-            O botão <strong>"Continuar Compra"</strong> não deixa claro se representa apenas um avanço no fluxo ou se está efetivamente
-            <strong>concluindo ou gerando o pedido</strong>. Ao não comunicar explicitamente o momento de compromisso final, o sistema reduz o senso de controle do usuário.
-            Para Ana (persona), isso significa tomar uma decisão importante (como confirmar um pedido com cobrança) sem ter perfeita consciência das consequências,
-            violando o princípio de que ações críticas devem ser claramente anunciadas e confirmadas.
-          </div>
-        </div>
-  
-        <!-- 3.5 -->
-        <div class="crit-card">
-          <div class="crit-header">
-            <div class="crit-num">3.5</div>
-            <div class="crit-title">Gestão de Erros</div>
-          </div>
-          <div class="crit-body">
-            A gestão de erros é prejudicada pela <strong>ausência de uma tela clara de revisão do pedido</strong> e pela
-            <strong>baixa visibilidade de ações de cancelar/voltar</strong>. O usuário tem pouca oportunidade de detectar e corrigir
-            erros de endereço, quantidade ou método de pagamento antes da conclusão. Na prática, o sistema empurra o usuário para a finalização
-            sem oferecer mecanismos eficientes de recuperação, transferindo o esforço de correção para processos posteriores
-            (cancelamento, estorno, contato com suporte).
-          </div>
-        </div>
-  
-        <!-- 3.8 -->
-        <div class="crit-card">
-          <div class="crit-header">
-            <div class="crit-num">3.8</div>
-            <div class="crit-title">Adaptabilidade</div>
-          </div>
-          <div class="crit-body">
-            A jornada de compra gamificada pode ser interessante para usuários que gostam de explorar cupons e pontos, mas
-            <strong>não se adapta</strong> a quem precisa de uma experiência de compra rápida e previsível. Falta um modo de
-            <strong>checkout simplificado</strong> que reduza distrações, minimize a chance de erros por pressa e respeite padrões
-            familiarizados de outros e-commerces. A interface trata todos os usuários da mesma forma, sem considerar diferentes níveis de
-            experiência, objetivos e contextos de uso (por exemplo, compras rápidas no transporte público).
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- COMPATIBILIDADE -->
-  <section id="compatibilidade">
-    <div class="container">
-      <div class="section-label">
-        <span class="section-num">4.3 · Critério 3.8</span>
-      </div>
-      <h2 class="section-title">Compatibilidade com o <span>Modelo de Compra</span> no Brasil</h2>
-      <p class="section-desc">
-        No contexto brasileiro, usuários estão acostumados a um fluxo de compra relativamente padronizado. A Shein se afasta desse padrão ao não oferecer uma etapa de revisão clara entre o carrinho e a finalização do pedido.
-      </p>
-  
-      <table class="compat-table">
-        <thead>
-          <tr>
-            <th>Etapa</th>
-            <th>Padrão Comum no Brasil</th>
-            <th>Fluxo Observado na Shein</th>
-            <th>Compatibilidade</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Carrinho</td>
-            <td>Listagem de itens → botão <strong>"Avançar"</strong></td>
-            <td>Listagem de itens → botão <strong>"Continuar Compra"</strong></td>
-            <td class="status-ok"><span>✔</span><span>Rótulo similar, porém sem aviso sobre impacto da próxima etapa</span></td>
-          </tr>
-          <tr>
-            <td>Revisão</td>
-            <td>Revisão de itens, valores, frete, endereço → botão <strong>"Avançar"</strong></td>
-            <td><em>Etapa de revisão pouco clara ou inexistente após "Continuar Compra"</em></td>
-            <td class="status-fail"><span>✖</span><span>Usuário não identifica momento de conferir tudo antes de finalizar</span></td>
-          </tr>
-          <tr>
-            <td>Pagamento</td>
-            <td>Escolha de método de pagamento → botão <strong>"Finalizar Pedido"</strong></td>
-            <td>Seleção de pagamento seguida de confirmação pouco destacada do fim da compra</td>
-            <td class="status-fail"><span>✖</span><span>Momento de compromisso final não é claramente diferenciado</span></td>
-          </tr>
-          <tr>
-            <td>Confirmação</td>
-            <td>Tela final apenas informativa (número do pedido, resumo)</td>
-            <td>Tela de confirmação após ações interpretadas como simples "avanços"</td>
-            <td class="status-fail"><span>✖</span><span>Usuário sente que "o pedido fechou sozinho" após clicar em "Continuar Compra"</span></td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <p class="section-desc" style="margin-top:24px;">
-        Em resumo, o rótulo <strong>"Continuar Compra"</strong> não corresponde ao que grande parte dos usuários brasileiros espera: um simples avanço
-        até a revisão do pedido. A ausência dessa etapa intermediária compromete a compatibilidade com o modelo mental local,
-        aumentando a probabilidade de erros e a sensação de perda de controle sobre a compra.
-      </p>
-    </div>
-  </section>
-  
-  <!-- PRÓXIMOS PASSOS -->
-  <section id="proximos">
-    <div class="container">
-      <div class="section-label">
-        <span class="section-num">Próximos Passos</span>
+        <span class="cycle-badge">CICLO 2</span>
+        <span class="section-num">2.2 · Próximos passos (em construção)</span>
       </div>
       <div class="next-strip">
-        <h3>Ciclo 2 · Prototipação e Redesign</h3>
+        <h3>2.2 Próximos passos · Prototipação e redesign</h3>
         <p>No próximo ciclo, serão desenvolvidas propostas de reformulação da interface, buscando corrigir os problemas identificados no fluxo de conclusão de compra e melhorar a experiência de Ana e demais usuários.</p>
         <div class="next-items">
           <div class="next-item">
