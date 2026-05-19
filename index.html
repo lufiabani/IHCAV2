@@ -509,6 +509,18 @@
     white-space: nowrap; flex-shrink: 0;
     margin-top: 1px;
   }
+  
+  .fix-badge {
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    border: 1px solid #bbf7d0;
+    vertical-align: middle;
+  }
 
   /* ── CRITERIA SECTION ── */
   .criteria-cards {
@@ -603,7 +615,7 @@
   .wiki-slot-body {
     flex: 1;
     font-size: 0.84rem;
-    color: var(--gray);
+    color: var(--text-light);
     font-style: italic;
     line-height: 1.5;
   }
@@ -636,6 +648,21 @@
     border-bottom: 1px solid var(--gray-mid); font-weight: 700; font-size: 1.1rem;
     color: var(--dark);
   }
+  
+  .progress-bar-ui {
+    background: var(--gray-light);
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-align: center;
+    border-bottom: 1px solid var(--gray-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  
   .phone-body {
     flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 120px;
   }
@@ -673,14 +700,10 @@
   
   .fast-checkout-toggle {
     background: var(--pink-light); border: 1px dashed var(--pink-mid); padding: 14px;
-    border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
-    font-size: 0.85rem; color: var(--pink-dark); font-weight: 700; cursor: pointer;
+    border-radius: 8px; margin-bottom: 16px; cursor: pointer;
   }
   .toggle-switch {
-    width: 40px; height: 22px; background: var(--pink); border-radius: 99px; position: relative;
-  }
-  .toggle-switch::after {
-    content: ''; position: absolute; right: 2px; top: 2px; width: 18px; height: 18px; background: white; border-radius: 50%;
+    width: 40px; height: 22px; background: var(--pink); border-radius: 99px; position: relative; display: flex; align-items: center; justify-content: flex-end;
   }
 
   .gamification-element { display: none; }
@@ -943,7 +966,7 @@
           </div>
         </div>
         <div class="problem-body">
-          <p>O botão de progressão ("Continuar Compra") é visualmente dominante, enquanto as opções de <strong>cancelar, voltar ou revisar</strong> são apresentadas em texto pequeno, cor neutra ou em regiões de baixa atenção. Isso reduz a percepção de que o usuário pode interromper a jornada de compra com segurança.</p>
+          <p>O botão de progressão ("Continuar Compra") é visualmente dominante, enquanto as opções de <strong>cancelar, voltar ou revisar</strong> são apresentadas em texto pequeno, cor neutra ou em regiões de baixa atenção. Isso reduz a percepção de que o usuário pode interromper a jornada de compra com segurança. Para a usuária <strong>Ana Paula</strong>, que possui histórico de erros em pedidos devido à sua atenção dividida, essa falta de clareza a força a realizar a gestão de erros e cancelamentos tardiamente, no momento pós-compra.</p>
           <div class="heuristic-tags">
             <span class="h-tag">H3 — Controle e liberdade do usuário</span>
             <span class="h-tag">H2 — Correspondência com o mundo real</span>
@@ -969,7 +992,7 @@
           </div>
         </div>
         <div class="problem-body">
-          <p>O checkout é apresentado de forma gamificada (pontos, cupons, mini-tarefas), o que pode ser atraente para alguns usuários, mas <strong>atrapalha quem quer apenas comprar rápido</strong>. Não há um modo de "checkout rápido" ou uma rota simplificada que pule etapas supérfluas para esse perfil.</p>
+          <p>O checkout é apresentado de forma gamificada (pontos, cupons, mini-tarefas). Embora essa fricção seja intencional por parte da Shein para manter o engajamento e a retenção, <strong>ela atrapalha usuários com alta frequência de compras como a Ana Paula</strong>, que buscam eficiência. Falta uma reflexão no design para equilibrar as métricas de conversão da loja com a autonomia da usuária, limitando-a por não possuir uma rota dedicada ao "checkout rápido".</p>
           <div class="heuristic-tags">
             <span class="h-tag">H7 — Flexibilidade e eficiência de uso</span>
             <span class="h-tag">Critério 3.8 — Adaptabilidade</span>
@@ -1219,6 +1242,10 @@
       <br><br>👉 <strong>Interaja com a tela do celular abaixo para testar o novo fluxo:</strong>
     </p>
 
+    <div style="text-align:center; margin-bottom: 20px; font-size: 0.9rem; color: var(--dark3); background: var(--blue-light); padding: 12px; border-radius: 8px; max-width: 600px; margin-left: auto; margin-right: auto; border: 1px solid var(--blue);">
+      👩 <strong>Cenário de uso:</strong> Ana Paula está no transporte público com atenção dividida e precisa comprar um vestido rapidamente em uma promoção relâmpago antes de perder sua parada.
+    </div>
+
     <div class="mockup-container">
       <div class="phone-mockup">
         <div class="phone-notch"></div>
@@ -1253,17 +1280,33 @@
             <span>Revisão do Pedido</span>
             <span style="width:20px;"></span>
           </div>
+          <div class="progress-bar-ui">
+            Carrinho <span style="color:var(--pink);">→</span> <span style="color:var(--dark); font-weight:800;">Revisão</span> <span style="color:var(--pink);">→</span> Pagamento
+            <span class="fix-badge">Corrige P4</span>
+          </div>
           <div class="phone-body" id="review-body">
             
-            <div class="fast-checkout-toggle" onclick="toggleFastCheckout()">
-              <span>Modo Checkout Rápido</span>
-              <div class="toggle-switch"></div>
+            <div class="fast-checkout-toggle" onclick="toggleFastCheckout()" style="display:flex; flex-direction:column; gap:8px; align-items:stretch;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.85rem; color:var(--pink-dark); font-weight:700; display:flex; align-items:center;">Comprar com 1 clique <span class="fix-badge">Corrige P3</span></span>
+                <div class="toggle-switch"><div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px;"></div></div>
+              </div>
+              <span style="font-size:0.7rem; color:var(--text-light); font-weight:500;">(Endereço e pagamento salvos) - Simplifica para agilidade.</span>
             </div>
 
             <div class="summary-card">
               <div class="summary-title">📍 Endereço de Entrega</div>
-              <div style="color:var(--text); font-weight:600; margin-bottom:4px;">Ivy Oliveira dos Reis</div>
-              <div style="color:var(--text-light); line-height:1.4;">Rua Armelindo Cesa Apto 403 B<br>Araranguá, SC - 88905-402</div>
+              <div style="color:var(--text); font-weight:600; margin-bottom:4px;">Ana Paula</div>
+              <div style="color:var(--text-light); line-height:1.4;">Avenida Central, Apto 403 B<br>São Paulo, SP</div>
+            </div>
+
+            <!-- Aplicando agrupamento do Arthur -->
+            <div class="summary-card">
+              <div class="summary-title">💳 Forma de Pagamento Prévia</div>
+              <div class="summary-row" style="margin-bottom:0;">
+                <span style="color:var(--text); font-weight:600;">Método: Pix</span> 
+                <span style="color:var(--pink); font-size:0.8rem; font-weight:600; cursor:pointer;">Alterar</span>
+              </div>
             </div>
 
             <div class="summary-card">
@@ -1286,6 +1329,9 @@
             <span style="cursor:pointer;" onclick="goToStep('step-review')">←</span>
             <span>Pagamento</span>
             <span style="width:20px;"></span>
+          </div>
+          <div class="progress-bar-ui">
+            Carrinho <span style="color:var(--gray-mid);">→</span> Revisão <span style="color:var(--pink);">→</span> <span style="color:var(--dark); font-weight:800;">Pagamento</span>
           </div>
           <div class="phone-body">
             <div class="summary-card" style="text-align:center; padding:24px 16px;">
@@ -1317,7 +1363,7 @@
             <p style="font-size:0.85rem; color:var(--text-light); text-align:center; margin-bottom:24px;">Seu código Pix foi gerado com sucesso. O pedido <strong>#8924103</strong> já está registrado em sua conta.</p>
             
             <div class="summary-card" style="width:100%; text-align:center; border:2px dashed var(--gray-mid); background:var(--gray-light);">
-              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjBIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjB2MjhIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
               <div class="btn-primary" style="font-size:0.8rem; padding:10px;">Copiar Código Pix</div>
             </div>
           </div>
@@ -1341,26 +1387,30 @@
 
     <p class="section-desc">
       Esta secção encerra o <strong>Ciclo 1</strong> no documento: após a rodada na wiki, registre aqui as <strong>perspectivas de outras duplas</strong>
-      (quatro comentários — duas duplas, dois integrantes cada) e os <strong>comentários da nossa dupla</strong> (Luís Antônio e Ivy) sobre o Ciclo 1.
+      e os <strong>comentários da nossa dupla</strong> (Luís Antônio e Ivy) sobre o Ciclo 1.
     </p>
 
-    <h3 class="wiki-subtitle">Duas duplas colegas — perspectivas sobre o nosso Ciclo 1 (4 comentários)</h3>
+    <h3 class="wiki-subtitle">Duas duplas colegas — perspectivas sobre o nosso Ciclo 1 (5 comentários)</h3>
     <div class="wiki-slots-grid">
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Dupla colega A · integrante 1</span>
-        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+        <span class="wiki-slot-label">Diva Moreira de Souza Hennemann (24102022)</span>
+        <p class="wiki-slot-body">"A análise heurística do fluxo de checkout da Shein está muito bem pontuada, evidenciando como a interface atual gera uma experiência de alto risco. A identificação conjunta dos problemas P1 (falta de confirmação) e P4 (quebra do modelo mental brasileiro) é cirúrgica. Como sugestão para o redesign no próximo ciclo, faz muito sentido focar em devolver a condução da tarefa ao usuário, criar uma tela de revisão dedicada com um CTA transparente e dar o devido peso visual às opções de cancelamento/voltar."</p>
       </div>
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Dupla colega A · integrante 2</span>
-        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+        <span class="wiki-slot-label">Arthur Bauer Cardoso (24103788)</span>
+        <p class="wiki-slot-body">"O diagnóstico apresentado na Wiki está excelente e representa de forma consistente as fragilidades. Em território nacional, o bombardeio de anúncios (P3) gera interrupção. Para o ciclo 2, é fundamental que seja imaginada uma rota de Checkout Rápido para resgatar a Adaptabilidade. Para a nova tela de Revisão, recomendaria aplicar o critério de Agrupamento para melhorar a distinção entre os blocos de endereço, pagamento e produtos para evitar equívocos."</p>
       </div>
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Dupla colega B · integrante 1</span>
-        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+        <span class="wiki-slot-label">Felipe Cidade Soares (24102023)</span>
+        <p class="wiki-slot-body">"O trabalho delimita o fluxo analisado com precisão. A combinação de P1 e P4 como 'Risco Crítico' é o ponto mais consistente. A persona Ana Paula está coerente, mas não sustenta bem os argumentos de P2 e P3. Dados como tolerância a cancelamentos e atenção dividida a tornariam operacional em toda a análise. Para o Ciclo 2, recomenda-se aplicar o Percurso Cognitivo respondendo às quatro perguntas chave."</p>
       </div>
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Dupla colega B · integrante 2</span>
-        <p class="wiki-slot-body">Inserir aqui o comentário registrado na wiki.</p>
+        <span class="wiki-slot-label">Theo de Souza Gerhardt (24104578)</span>
+        <p class="wiki-slot-body">"O protótipo demonstra boa intenção na correção dos problemas heurísticos. Para o Ciclo 2, seria importante mapear explicitamente qual mudança de layout corrigiu qual problema. Senti falta da persona Ana Paula no protótipo, narrar um cenário de uso tornaria a avaliação mais robusta. A funcionalidade 'Modo Checkout Rápido' ficou confusa, a sugestão é substituir por 'Comprar com 1 clique' com um breve descritivo."</p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Artur Manarin de Jesus (24105747)</span>
+        <p class="wiki-slot-body">"A análise heurística do fluxo de checkout da Shein está muito bem pontuada, evidenciando como a interface atual gera uma experiência de alto risco e esforço cognitivo para o usuário. A identificação conjunta dos problemas P1 (falta de confirmação) e P4 (quebra do modelo mental brasileiro) é cirúrgica: mascarar o ponto de não retorno da compra sob o rótulo genérico de "Continuar Compra" é uma falha grave de controle explícito que destrói a confiança na navegação. Ao omitir a etapa de revisão, o sistema impede a aplicação de um Design Preventivo. Ele força a usuária (Ana Paula) a fechar o pedido às cegas, transferindo toda a carga da gestão de erros (P2) e o retrabalho (cancelamentos, estornos) para o momento pós-compra, o que é altamente frustrante. Como sugestão para o redesign no próximo ciclo, faz muito sentido focar em devolver a condução da tarefa ao usuário e alinhar o sistema ao modelo mental esperado. Criar uma tela de revisão dedicada com um CTA transparente (ex: "Finalizar Pedido") e dar o devido peso visual às opções de cancelamento/voltar são passos essenciais. Além disso, estruturar a rota de "checkout rápido" para contornar a poluição da jornada gamificada (P3) será uma excelente forma de garantir a adaptabilidade e a eficiência de uso para contextos mobile."</p>
       </div>
     </div>
 
@@ -1368,11 +1418,11 @@
     <div class="our-duo-grid">
       <div class="wiki-slot">
         <span class="wiki-slot-label">Luís Antônio</span>
-        <p class="wiki-slot-body">Inserir aqui o seu comentário sobre o Ciclo 1.</p>
+        <p class="wiki-slot-body">"Recebemos feedbacks muito assertivos. Nossa compatibilidade (P4) ficou excelente porque a sacada de contrastar o fluxo global da Shein com o modelo do consumidor brasileiro (H2) ficou evidente. Concordo com a turma que a definição de uso da persona Ana Paula com 'atenção dividida' no transporte público de fato justifica a gravidade que atribuímos ao risco de gerar um pedido sem confirmação em P1."</p>
       </div>
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Ivy</span>
-        <p class="wiki-slot-body">Inserir aqui o comentário da Ivy sobre o Ciclo 1.</p>
+        <span class="wiki-slot-label">Ivy Oliveira</span>
+        <p class="wiki-slot-body">"Fizemos as intervenções no layout guiados pelos comentários: o indicador para o progresso das etapas fixo no topo devolveu o status do sistema (H1). Em relação ao P3, a análise nos lembrou que a fricção do app é intencional para retenção; o nosso insight-chave do trabalho acaba evidenciando o claro embate ético entre o Deceptive Design (focado em conversão) e a real prevenção de erros (H5) na interface."</p>
       </div>
     </div>
   </div>
@@ -1416,19 +1466,20 @@
     const body = document.getElementById('review-body');
     body.classList.toggle('show-gamification');
     const toggleBtn = document.querySelector('.fast-checkout-toggle');
+    const switchEl = toggleBtn.querySelector('.toggle-switch');
     
     if (body.classList.contains('show-gamification')) {
       toggleBtn.style.background = 'white';
       toggleBtn.style.border = '1px solid var(--gray-mid)';
-      toggleBtn.querySelector('.toggle-switch').style.background = 'var(--gray-mid)';
-      toggleBtn.querySelector('.toggle-switch').style.justifyContent = 'flex-start';
-      toggleBtn.querySelector('.toggle-switch').innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px;"></div>';
+      switchEl.style.background = 'var(--gray-mid)';
+      switchEl.style.justifyContent = 'flex-start';
+      switchEl.innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px;"></div>';
     } else {
       toggleBtn.style.background = 'var(--pink-light)';
       toggleBtn.style.border = '1px dashed var(--pink-mid)';
-      toggleBtn.querySelector('.toggle-switch').style.background = 'var(--pink)';
-      toggleBtn.querySelector('.toggle-switch').style.justifyContent = 'flex-end';
-      toggleBtn.querySelector('.toggle-switch').innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px 2px 2px auto;"></div>';
+      switchEl.style.background = 'var(--pink)';
+      switchEl.style.justifyContent = 'flex-end';
+      switchEl.innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px 2px 2px auto;"></div>';
     }
   }
 </script>
