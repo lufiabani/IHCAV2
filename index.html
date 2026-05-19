@@ -1314,6 +1314,15 @@
   .shein-promo-hl { font-size: 1rem; font-weight: 900; color: white; line-height: 1.1; font-family: 'Arial Black', sans-serif; }
   .shein-promo-sub { font-size: 0.62rem; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 1px; }
   .shein-promo-cta { margin-left: auto; background: white; color: #e8427c; font-size: 0.62rem; font-weight: 800; padding: 4px 10px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; z-index: 1; }
+
+  /* ── CANCEL BUTTON ── */
+  .btn-shein-cancel {
+    background: none; border: none; font-size: 0.76rem; color: #aaa;
+    cursor: pointer; font-family: var(--font); font-weight: 600;
+    text-align: center; padding: 4px; width: 100%;
+    transition: color 0.15s;
+  }
+  .btn-shein-cancel:hover { color: #e8427c; }
 </style>
 </head>
 <body>
@@ -2409,6 +2418,7 @@
               <span class="shein-foot-val" id="c1k-footer-total">R$ 108,82</span>
             </div>
             <button class="btn-shein pink2" onclick="c2PlaceOrder()">⚡ Confirmar Pedido</button>
+            <button class="btn-shein-cancel" onclick="c2CancelPurchase()">✕ Cancelar compra</button>
           </div>
         </div>
 
@@ -2429,15 +2439,6 @@
             <div class="shein-step"><div class="shein-step-dot">4</div>Revisão</div>
           </div>
           <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
-            <!-- Promo banner - aparece só no fluxo manual -->
-            <div class="shein-promo-banner" onclick="c2ApplyCpn('PIX10','10% no Pix hoje'); c2Toast('Cupom PIX10 aplicado! Use no pagamento.')">
-              <div>
-                <div class="shein-promo-hl">PIX10</div>
-                <div class="shein-promo-sub">10% de desconto no Pix · só hoje!</div>
-              </div>
-              <div style="font-size:1.1rem; z-index:1;">💠</div>
-              <div class="shein-promo-cta">Pegar cupom</div>
-            </div>
             <div class="shein-acard">
               <div class="shein-stitle2">📍 Endereço salvo <button class="shein-edit2" onclick="c2Toast('Edição disponível no app real')">Alterar</button></div>
               <div style="display:flex; gap:10px; align-items:flex-start;">
@@ -2486,6 +2487,7 @@
               <span class="shein-foot-val" id="c2-addr-ftotal">R$ 114,55</span>
             </div>
             <button class="btn-shein" onclick="goToStep('step-payment-c2')">Ir para Pagamento</button>
+            <button class="btn-shein-cancel" onclick="c2CancelPurchase()">✕ Cancelar compra</button>
           </div>
         </div>
 
@@ -2529,9 +2531,9 @@
                   <span style="background:#f0fff4; color:#16a34a; font-size:0.6rem; font-weight:800; padding:1px 5px; border-radius:3px; border:1px solid #bbf7d0;">-5%</span>
                 </div>
                 <div class="shein-payext2">
-                  <div class="shein-payext-in" style="display:flex; gap:10px; align-items:center;">
-                    <div style="width:56px; height:56px; background:#f0f0f0; border-radius:5px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:#888; border:1px solid #ddd; flex-shrink:0; text-align:center; font-weight:600;">QR<br>Code</div>
-                    <div style="font-size:0.7rem; color:#666; line-height:1.5;">Escaneie após confirmar. Válido por <strong>30 min</strong>. Total com desconto Pix: <strong style="color:#e8427c;" id="c2-pix-preview">R$ 108,82</strong></div>
+                  <div class="shein-payext-in" style="font-size:0.72rem; color:#666; line-height:1.65;">
+                    ℹ️ O QR Code Pix será gerado apenas após a confirmação do pedido. Você terá <strong>30 minutos</strong> para efetuar o pagamento.<br>
+                    <span style="color:#e8427c; font-weight:700;">5% de desconto</span> aplicado automaticamente. Total: <strong style="color:#e8427c;" id="c2-pix-preview">R$ 108,82</strong>
                   </div>
                 </div>
               </div>
@@ -2590,6 +2592,7 @@
               <span class="shein-foot-val" id="c2-pay-ftotal">R$ 108,82</span>
             </div>
             <button class="btn-shein" onclick="goToStep('step-review-final-c2')">Revisar Pedido →</button>
+            <button class="btn-shein-cancel" onclick="c2CancelPurchase()">✕ Cancelar compra</button>
           </div>
         </div>
 
@@ -2645,6 +2648,7 @@
               <span class="shein-foot-val" id="rev-ftotal">R$ 108,82</span>
             </div>
             <button class="btn-shein pink2" onclick="c2PlaceOrder()">✓ Confirmar Pedido</button>
+            <button class="btn-shein-cancel" onclick="c2CancelPurchase()">✕ Cancelar compra</button>
           </div>
         </div>
 
@@ -3056,6 +3060,11 @@
     } else {
       goToStep('step-address-c2');
     }
+  }
+
+  function c2CancelPurchase() {
+    goToStep('step-cart-c2');
+    c2Toast('Compra cancelada. Seus itens continuam no carrinho.');
   }
 
   function c2GoManual() {
