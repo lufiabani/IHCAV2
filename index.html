@@ -71,25 +71,160 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--gray-mid);
     padding: 12px 32px;
-    display: flex; align-items: center; gap: 20px;
+    display: flex; align-items: center; gap: 16px;
   }
   .nav-brand {
     font-weight: 800; font-size: 0.95rem;
     color: var(--pink-dark); letter-spacing: -0.3px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
-  .nav-links {
-    display: flex; gap: 6px; flex-wrap: wrap;
+  .nav-cycles {
+    display: flex; gap: 8px; flex-wrap: wrap;
     list-style: none; margin-left: auto;
+    align-items: flex-start;
   }
-  .nav-links a {
-    font-size: 0.78rem; font-weight: 500;
-    color: var(--text-light); text-decoration: none;
-    padding: 4px 10px; border-radius: 6px;
+  .nav-cycle {
+    position: relative;
+  }
+  .nav-cycle-toggle {
+    font-family: var(--font);
+    font-size: 0.78rem; font-weight: 700;
+    color: var(--text);
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
     transition: all 0.2s;
+    white-space: nowrap;
   }
-  .nav-links a:hover {
-    background: var(--pink-light); color: var(--pink-dark);
+  .nav-cycle-toggle::after {
+    content: '▾';
+    font-size: 0.65rem;
+    opacity: 0.6;
+  }
+  .nav-cycle-toggle:hover,
+  .nav-cycle.is-open .nav-cycle-toggle {
+    background: var(--pink-light);
+    border-color: var(--pink-mid);
+    color: var(--pink-dark);
+  }
+  .nav-cycle[data-cycle="1"] .nav-cycle-toggle { border-left: 3px solid var(--pink); }
+  .nav-cycle[data-cycle="2"] .nav-cycle-toggle { border-left: 3px solid var(--dark3); }
+  .nav-cycle[data-cycle="3"] .nav-cycle-toggle { border-left: 3px solid var(--dark2); }
+  .nav-cycle[data-cycle="3"] .nav-submenu {
+    left: auto;
+    right: 0;
+  }
+  .nav-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    max-width: min(280px, calc(100vw - 24px));
+    list-style: none;
+    margin: 0;
+    padding: 8px 6px 6px;
+    padding-top: 10px;
+    z-index: 200;
+    background: white;
+    border: 1px solid var(--gray-mid);
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+  }
+  /* Ponte invisível: o padding-top mantém o hover contínuo entre botão e lista */
+  .nav-submenu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+  }
+  .nav-cycle.is-open .nav-submenu,
+  .nav-cycle:focus-within .nav-submenu {
+    display: block;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-cycle:hover .nav-submenu {
+      display: block;
+    }
+  }
+  .nav-submenu a {
+    display: block;
+    font-size: 0.76rem; font-weight: 500;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: all 0.15s;
+    line-height: 1.35;
+  }
+  .nav-submenu a:hover {
+    background: var(--pink-light);
+    color: var(--pink-dark);
+  }
+  .nav-submenu a.is-soon {
+    opacity: 0.55;
+    cursor: default;
+    pointer-events: none;
+  }
+  .nav-submenu-num {
+    font-weight: 700;
+    color: var(--pink-dark);
+    margin-right: 4px;
+  }
+  .nav-cycle-link {
+    font-family: var(--font);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: all 0.2s;
+    opacity: 0.85;
+  }
+  .nav-cycle-link:hover {
+    background: var(--pink-light);
+    border-color: var(--pink-mid);
+    color: var(--pink-dark);
+    opacity: 1;
+  }
+  .nav-cycle[data-cycle="3"] .nav-cycle-link {
+    border-left: 3px solid var(--dark2);
+  }
+  .under-construction {
+    text-align: center;
+    padding: 72px 32px;
+    background: var(--gray-light);
+    border: 2px dashed var(--gray-mid);
+    border-radius: var(--radius-lg);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .under-construction-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+  .under-construction h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .under-construction p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
   }
 
   /* ── HERO ── */
@@ -173,6 +308,12 @@
     font-size: 0.7rem; font-weight: 800;
     letter-spacing: 1.5px; text-transform: uppercase;
     padding: 5px 12px; border-radius: 6px;
+  }
+  .cycle-badge.c2 {
+    background: var(--dark3);
+  }
+  .cycle-badge.c3 {
+    background: var(--dark2);
   }
   .section-num {
     font-size: 0.75rem; font-weight: 700;
@@ -522,6 +663,195 @@
     vertical-align: middle;
   }
 
+  /* ── CICLO 2: COMPARAÇÃO DE PROTÓTIPOS ── */
+  .changes-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    margin: 24px 0 40px;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .changes-summary-table th,
+  .changes-summary-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-mid);
+    vertical-align: top;
+  }
+  .changes-summary-table th {
+    background: var(--dark);
+    color: white;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .changes-summary-table tr:last-child td { border-bottom: none; }
+  .proto-change-card {
+    background: white;
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+  }
+  .proto-change-card h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .proto-change-card .change-meta {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+  .proto-compare-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 16px;
+  }
+  .proto-compare-col { min-width: 0; }
+  .compare-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  .compare-before { background: var(--gray-light); color: var(--gray); }
+  .compare-after { background: var(--blue-light); color: var(--dark3); }
+  .compare-snapshot {
+    background: #fafafa;
+    border: 1px solid var(--gray-mid);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 0.78rem;
+  }
+  .compare-snapshot .snap-header {
+    font-weight: 700;
+    font-size: 0.72rem;
+    color: var(--dark);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--gray-mid);
+  }
+  .compare-snapshot .snap-toggle-c1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--pink-light);
+    border: 1px dashed var(--pink-mid);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    color: var(--pink-dark);
+    margin-bottom: 8px;
+  }
+  .compare-snapshot .snap-toggle-c2 {
+    background: var(--pink-light);
+    border: 1px dashed var(--pink-mid);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .compare-snapshot .snap-progress {
+    background: var(--gray-light);
+    padding: 6px 10px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    color: var(--text-light);
+  }
+  .compare-snapshot .snap-scenario {
+    background: var(--blue-light);
+    border: 1px solid var(--blue);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    color: var(--dark3);
+    margin-bottom: 8px;
+  }
+  .compare-snapshot .snap-card {
+    background: white;
+    border: 1px solid var(--gray-mid);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 6px;
+  }
+  .compare-snapshot .snap-card-title {
+    font-weight: 700;
+    font-size: 0.72rem;
+    margin-bottom: 4px;
+  }
+  .compare-snapshot .snap-missing {
+    border: 2px dashed var(--red-light);
+    background: var(--red-light);
+    color: var(--red);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  .proto-compare-arrow {
+    font-size: 1.4rem;
+    color: var(--pink);
+    font-weight: 800;
+    padding-top: 36px;
+    text-align: center;
+  }
+  .change-how {
+    font-size: 0.84rem;
+    color: var(--text);
+    background: var(--gray-light);
+    padding: 12px 14px;
+    border-radius: 8px;
+    line-height: 1.55;
+    border-left: 3px solid var(--pink);
+  }
+  .feedback-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 28px;
+  }
+  .feedback-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    border: 1px solid var(--pink-mid);
+  }
+  @media (max-width: 720px) {
+    .proto-compare-row {
+      grid-template-columns: 1fr;
+    }
+    .proto-compare-arrow {
+      padding: 0;
+      transform: rotate(90deg);
+    }
+    .changes-summary-table { font-size: 0.76rem; }
+    .changes-summary-table th,
+    .changes-summary-table td { padding: 8px; }
+  }
+
   /* ── CRITERIA SECTION ── */
   .criteria-cards {
     display: grid; gap: 20px;
@@ -702,8 +1032,19 @@
     background: var(--pink-light); border: 1px dashed var(--pink-mid); padding: 14px;
     border-radius: 8px; margin-bottom: 16px; cursor: pointer;
   }
+  .proto-c1 .fast-checkout-toggle {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.85rem; color: var(--pink-dark); font-weight: 700;
+  }
   .toggle-switch {
     width: 40px; height: 22px; background: var(--pink); border-radius: 99px; position: relative; display: flex; align-items: center; justify-content: flex-end;
+  }
+  .proto-c1 .toggle-switch {
+    display: block;
+  }
+  .proto-c1 .toggle-switch::after {
+    content: ''; position: absolute; right: 2px; top: 2px;
+    width: 18px; height: 18px; background: white; border-radius: 50%;
   }
 
   .gamification-element { display: none; }
@@ -723,6 +1064,143 @@
   .success-icon { font-size: 3rem; text-align: center; margin: 40px 0 20px; }
   .success-text { text-align: center; font-size: 1.1rem; font-weight: 700; color: var(--green); margin-bottom: 10px; }
 
+  /* ── SHEIN PROTOTYPE (CICLO 2) ── */
+  .proto-c2 { background: #f5f5f5; font-size: 14px; }
+  .proto-c2 .proto-step { display: none !important; }
+  .proto-c2 .proto-step.active { display: flex !important; flex-direction: column; height: 100%; }
+  .proto-c2 .phone-body { flex: 1; min-height: 0; overflow-y: auto; }
+
+  .shein-hdr { background: white; padding: 36px 14px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; flex-shrink: 0; }
+  .shein-back { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #1a1a1a; width: 28px; padding: 0; line-height: 1; font-family: var(--font); }
+  .shein-ttl { flex: 1; text-align: center; font-size: 0.92rem; font-weight: 700; color: #1a1a1a; }
+  .shein-act { font-size: 1rem; width: 28px; text-align: right; cursor: pointer; color: #1a1a1a; }
+
+  .shein-flash { background: linear-gradient(90deg, #e8427c, #c0185a); color: white; padding: 7px 14px; display: flex; align-items: center; justify-content: space-between; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; flex-shrink: 0; }
+  .shein-timer { display: flex; align-items: center; gap: 3px; }
+  .shein-tbox { background: rgba(0,0,0,0.28); border-radius: 3px; padding: 2px 5px; font-size: 0.78rem; font-weight: 800; font-family: var(--mono); }
+
+  .shein-steps { display: flex; align-items: center; padding: 7px 10px; background: white; border-bottom: 1px solid #eee; flex-shrink: 0; }
+  .shein-step { flex: 1; text-align: center; font-size: 0.57rem; font-weight: 600; color: #bbb; line-height: 1.3; }
+  .shein-step.act { color: #e8427c; font-weight: 800; }
+  .shein-step.dn { color: #22c55e; font-weight: 700; }
+  .shein-step-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #ddd; margin: 0 auto 3px; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; font-weight: 800; color: #bbb; }
+  .shein-step.act .shein-step-dot { border-color: #e8427c; background: #e8427c; color: white; }
+  .shein-step.dn .shein-step-dot { border-color: #22c55e; background: #22c55e; color: white; }
+  .shein-step-line { flex: 0.4; height: 2px; background: #eee; margin-top: -13px; }
+  .shein-step-line.dn { background: #22c55e; }
+
+  .shein-pcard { background: white; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; overflow: hidden; }
+  .shein-prow { display: flex; gap: 10px; padding: 12px; }
+  .shein-pimg2 { width: 76px; height: 96px; flex-shrink: 0; border-radius: 6px; background: linear-gradient(135deg, #fce4ef 0%, #f5a7c3 100%); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; }
+  .shein-pname2 { font-size: 0.75rem; color: #333; line-height: 1.4; margin-bottom: 5px; }
+  .shein-stars2 { color: #fbbf24; font-size: 0.65rem; margin-bottom: 4px; }
+  .shein-pprices { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; flex-wrap: wrap; }
+  .shein-price-n { font-size: 0.95rem; font-weight: 800; color: #e8427c; }
+  .shein-price-o { font-size: 0.7rem; color: #bbb; text-decoration: line-through; }
+  .shein-disc2 { background: #fff0f5; color: #e8427c; font-size: 0.6rem; font-weight: 800; padding: 1px 5px; border-radius: 3px; }
+  .shein-free2 { background: #f0fff4; color: #16a34a; font-size: 0.6rem; font-weight: 800; padding: 1px 5px; border-radius: 3px; border: 1px solid #bbf7d0; }
+
+  .shein-opts { padding: 0 12px 12px; }
+  .shein-olbl { font-size: 0.65rem; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 5px; margin-top: 8px; }
+  .shein-sizes { display: flex; gap: 5px; flex-wrap: wrap; }
+  .shein-sz { border: 1px solid #ddd; border-radius: 4px; padding: 3px 9px; font-size: 0.7rem; font-weight: 600; cursor: pointer; background: white; color: #333; transition: all 0.15s; min-width: 34px; text-align: center; }
+  .shein-sz.on { border-color: #1a1a1a; background: #1a1a1a; color: white; }
+  .shein-colors { display: flex; gap: 7px; flex-wrap: wrap; }
+  .shein-clr { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
+  .shein-clr.on { border-color: #1a1a1a; box-shadow: 0 0 0 2px white inset; }
+
+  .shein-qty { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; width: fit-content; }
+  .shein-qbtn { width: 26px; height: 26px; background: #f5f5f5; border: none; font-size: 0.95rem; cursor: pointer; color: #333; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .shein-qnum { width: 32px; text-align: center; font-size: 0.82rem; font-weight: 700; border-left: 1px solid #ddd; border-right: 1px solid #ddd; line-height: 26px; }
+
+  .shein-cpnrow { background: white; border-radius: 8px; border: 1px solid #eee; padding: 10px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; cursor: pointer; }
+  .shein-cpn-applied2 { color: #e8427c; font-size: 0.7rem; font-weight: 700; }
+
+  .shein-acard { background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border: 1px solid #eee; }
+  .shein-stitle2 { font-size: 0.78rem; font-weight: 800; color: #1a1a1a; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+  .shein-edit2 { background: none; border: none; font-size: 0.7rem; color: #e8427c; font-weight: 700; cursor: pointer; padding: 0; font-family: var(--font); }
+  .shein-aname2 { font-size: 0.8rem; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+  .shein-atxt2 { font-size: 0.72rem; color: #666; line-height: 1.5; }
+  .shein-adef2 { display: inline-block; background: #fff0f5; color: #e8427c; font-size: 0.6rem; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-top: 3px; border: 1px solid #fce4ef; }
+
+  .shein-dopt2 { border: 1px solid #ddd; border-radius: 7px; padding: 9px 12px; display: flex; align-items: center; gap: 9px; cursor: pointer; margin-bottom: 7px; background: white; transition: all 0.15s; }
+  .shein-dopt2.on { border-color: #e8427c; background: #fff5f9; }
+  .shein-dradio2 { width: 15px; height: 15px; border-radius: 50%; border: 2px solid #ddd; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .shein-dopt2.on .shein-dradio2 { border-color: #e8427c; }
+  .shein-dopt2.on .shein-dradio2::after { content: ''; width: 7px; height: 7px; background: #e8427c; border-radius: 50%; display: block; }
+  .shein-dname2 { font-size: 0.76rem; font-weight: 700; color: #1a1a1a; }
+  .shein-ddate2 { font-size: 0.67rem; color: #888; }
+  .shein-dprice2 { margin-left: auto; font-size: 0.76rem; font-weight: 700; color: #1a1a1a; }
+  .shein-dprice2.free { color: #16a34a; }
+
+  .shein-psum { background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border: 1px solid #eee; }
+  .shein-prow2 { display: flex; justify-content: space-between; font-size: 0.75rem; color: #666; margin-bottom: 6px; }
+  .shein-prow2.tot { font-weight: 800; color: #1a1a1a; font-size: 0.88rem; padding-top: 6px; border-top: 1px solid #eee; margin-top: 2px; margin-bottom: 0; }
+  .shein-sav { color: #e8427c; font-weight: 700; }
+
+  .shein-payopt2 { background: white; border: 1px solid #ddd; border-radius: 7px; overflow: hidden; cursor: pointer; margin-bottom: 8px; transition: border-color 0.15s; }
+  .shein-payopt2.on { border-color: #e8427c; }
+  .shein-payopt-hdr2 { padding: 11px 12px; display: flex; align-items: center; gap: 9px; }
+  .shein-payopt2.on .shein-payopt-hdr2 { background: #fff5f9; }
+  .shein-payicon2 { font-size: 1.1rem; width: 24px; text-align: center; }
+  .shein-payname2 { font-size: 0.8rem; font-weight: 700; color: #1a1a1a; }
+  .shein-paydesc2 { font-size: 0.67rem; color: #888; }
+  .shein-payext2 { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: #fafafa; border-top: 0 solid #eee; }
+  .shein-payopt2.on .shein-payext2 { max-height: 240px; border-top-width: 1px; }
+  .shein-payext-in { padding: 10px 12px; }
+  .shein-inp2 { border: 1px solid #ddd; border-radius: 5px; padding: 7px 10px; font-size: 0.75rem; font-family: var(--font); outline: none; width: 100%; color: #333; margin-bottom: 6px; }
+  .shein-inp2:focus { border-color: #e8427c; }
+  .shein-inp2-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+
+  .shein-1clk { background: white; border-radius: 7px; padding: 10px 12px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px; }
+  .shein-tgl2 { width: 40px; height: 22px; background: #ddd; border-radius: 11px; position: relative; transition: background 0.2s; flex-shrink: 0; }
+  .shein-tgl2.on { background: #e8427c; }
+  .shein-tgl2::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: left 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  .shein-tgl2.on::after { left: 20px; }
+
+  .btn-shein { background: #1a1a1a; color: white; border: none; padding: 13px; border-radius: 5px; font-weight: 800; font-size: 0.9rem; width: 100%; cursor: pointer; font-family: var(--font); transition: background 0.15s; }
+  .btn-shein:hover { background: #333; }
+  .btn-shein.pink2 { background: #e8427c; }
+  .btn-shein.out2 { background: white; color: #1a1a1a; border: 1px solid #ddd; font-weight: 600; }
+
+  .shein-foot { position: absolute; bottom: 0; left: 0; right: 0; background: white; padding: 10px 14px 18px; border-top: 1px solid #eee; display: flex; flex-direction: column; gap: 7px; }
+  .shein-foot-tot { display: flex; justify-content: space-between; align-items: center; }
+  .shein-foot-lbl { font-size: 0.72rem; color: #888; }
+  .shein-foot-val { font-size: 1.05rem; font-weight: 900; color: #e8427c; }
+
+  .shein-toast3 { position: absolute; top: 68px; left: 12px; right: 12px; background: rgba(26,26,26,0.9); color: white; padding: 9px 13px; border-radius: 7px; font-size: 0.74rem; font-weight: 600; z-index: 300; opacity: 0; transition: opacity 0.3s; text-align: center; pointer-events: none; }
+  .shein-toast3.vis { opacity: 1; }
+
+  .shein-overlay2 { position: absolute; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: none; }
+  .shein-overlay2.vis { display: block; }
+  .shein-cpnpop2 { position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 14px 14px 0 0; padding: 14px 14px 20px; z-index: 201; box-shadow: 0 -6px 24px rgba(0,0,0,0.15); display: none; }
+  .shein-cpnpop2.vis { display: block; }
+  .shein-pop-hdl { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 12px; }
+  .shein-pop-ttl { font-size: 0.9rem; font-weight: 800; color: #1a1a1a; margin-bottom: 12px; }
+  .shein-cpn-irow { display: flex; gap: 7px; margin-bottom: 12px; }
+  .shein-cpn-i { flex: 1; border: 1px solid #ddd; border-radius: 5px; padding: 9px 10px; font-size: 0.78rem; font-family: var(--font); outline: none; text-transform: uppercase; }
+  .shein-cpn-i:focus { border-color: #e8427c; }
+  .shein-cpn-abtn { background: #1a1a1a; color: white; border: none; border-radius: 5px; padding: 9px 14px; font-weight: 700; font-size: 0.78rem; cursor: pointer; font-family: var(--font); }
+  .shein-ac2 { background: #fff5f9; border: 1px dashed #e8427c; border-radius: 7px; padding: 9px 12px; display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 7px; }
+  .shein-ac-code2 { font-size: 0.78rem; font-weight: 800; color: #e8427c; font-family: var(--mono); }
+  .shein-ac-desc2 { font-size: 0.68rem; color: #666; }
+
+  .shein-succ { display: flex; flex-direction: column; align-items: center; padding: 20px 14px; text-align: center; padding-bottom: 90px; }
+  .shein-succ-ic { width: 64px; height: 64px; background: #f0fff4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 12px; border: 2px solid #22c55e; }
+  .shein-succ-ttl { font-size: 1rem; font-weight: 800; color: #1a1a1a; margin-bottom: 4px; }
+  .shein-succ-sub { font-size: 0.75rem; color: #666; margin-bottom: 16px; line-height: 1.5; }
+  .shein-order-box { background: #f5f5f5; border-radius: 7px; padding: 10px 14px; width: 100%; margin-bottom: 12px; }
+  .shein-order-lbl { font-size: 0.65rem; color: #999; margin-bottom: 3px; }
+  .shein-order-id { font-size: 0.88rem; font-weight: 800; color: #1a1a1a; font-family: var(--mono); }
+  .shein-track { width: 100%; background: white; border-radius: 7px; border: 1px solid #eee; padding: 10px 12px; margin-bottom: 12px; text-align: left; }
+  .shein-track-row { display: flex; align-items: flex-start; gap: 9px; font-size: 0.72rem; margin-bottom: 8px; }
+  .shein-track-row:last-child { margin-bottom: 0; }
+  .shein-tdot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #ddd; flex-shrink: 0; margin-top: 1px; }
+  .shein-tdot.act { border-color: #e8427c; background: #e8427c; }
+  .shein-tdot.dn { border-color: #22c55e; background: #22c55e; }
+  .shein-ttext { font-weight: 600; color: #333; }
+  .shein-tdate { color: #999; font-size: 0.65rem; }
+
   /* ── FOOTER ── */
   footer {
     background: var(--dark);
@@ -740,7 +1218,20 @@
     .persona-sidebar { flex-direction: row; flex-wrap: wrap; justify-content: center; }
     .screens-grid, .proto-grid { grid-template-columns: 1fr; }
     .persona-row { grid-template-columns: 1fr; }
-    nav { padding: 10px 16px; }
+    nav { padding: 10px 16px; flex-wrap: wrap; }
+    .nav-cycles { margin-left: 0; width: 100%; justify-content: flex-start; }
+    .nav-submenu {
+      position: static;
+      box-shadow: none;
+      border: none;
+      background: var(--gray-light);
+      margin-top: 4px;
+      width: 100%;
+      padding-top: 6px;
+    }
+    .nav-submenu::before {
+      display: none;
+    }
     .hero { padding: 60px 20px 52px; }
     .container { padding: 0 16px; }
     section { padding: 48px 0; }
@@ -757,6 +1248,72 @@
   .delay-1 { animation-delay: 0.1s; }
   .delay-2 { animation-delay: 0.2s; }
   .delay-3 { animation-delay: 0.3s; }
+
+  /* ── SHEIN LOGO & APP HEADER ── */
+  .shein-app-hdr {
+    background: white; padding: 34px 14px 10px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #eee; flex-shrink: 0;
+  }
+  .shein-logo-mark {
+    font-size: 1.3rem; font-weight: 900; color: #1a1a1a;
+    letter-spacing: 2px; font-family: 'Arial Black', 'Inter', sans-serif;
+    cursor: pointer; user-select: none;
+  }
+  .shein-hdr-icons { display: flex; gap: 12px; align-items: center; }
+  .shein-hdr-btn { background: none; border: none; font-size: 1rem; cursor: pointer; padding: 2px; position: relative; }
+  .shein-hdr-badge {
+    position: absolute; top: -3px; right: -3px;
+    background: #e8427c; color: white; font-size: 0.5rem; font-weight: 800;
+    border-radius: 50%; width: 13px; height: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── BOTTOM NAV ── */
+  .shein-cart-btm { position: absolute; bottom: 0; left: 0; right: 0; background: white; }
+  .shein-checkout-bar { padding: 9px 14px 6px; border-top: 1px solid #eee; }
+  .shein-bnav { display: flex; align-items: center; padding: 5px 4px 10px; border-top: 1px solid #eee; }
+  .shein-bnav-item { flex: 1; text-align: center; cursor: pointer; padding: 2px; }
+  .shein-bnav-icon { font-size: 1.05rem; display: block; margin-bottom: 2px; position: relative; }
+  .shein-bnav-lbl { font-size: 0.52rem; font-weight: 600; color: #aaa; }
+  .shein-bnav-item.bnav-on .shein-bnav-lbl { color: #e8427c; }
+  .shein-bnav-badge { position: absolute; top: -3px; right: calc(50% - 14px); background: #e8427c; color: white; font-size: 0.5rem; font-weight: 800; border-radius: 50%; width: 12px; height: 12px; display: flex; align-items: center; justify-content: center; }
+  .shein-bnav-logo { font-size: 0.62rem; font-weight: 900; color: #1a1a1a; letter-spacing: 1.5px; font-family: 'Arial Black', sans-serif; padding: 3px 6px; background: #f5f5f5; border-radius: 4px; display: inline-block; margin-bottom: 2px; }
+
+  /* ── 1-CLICK SECTION (CART) ── */
+  .shein-1click-cart {
+    background: white; border-radius: 8px;
+    border: 1.5px solid #eee; padding: 12px 14px;
+    margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
+  }
+  .shein-1click-cart.on { border-color: #e8427c; background: linear-gradient(135deg, #fff5f9, #fff); }
+  .shein-1click-cart-hdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .shein-1click-badge { background: #e8427c; color: white; font-size: 0.55rem; font-weight: 800; padding: 2px 6px; border-radius: 99px; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .shein-1click-preview { display: none; padding-top: 10px; margin-top: 10px; border-top: 1px dashed #fce4ef; }
+  .shein-1click-cart.on .shein-1click-preview { display: block; }
+  .shein-1click-data { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: 0.72rem; }
+  .shein-1click-data:last-child { margin-bottom: 0; }
+
+  /* ── 1-CLICK FAST CONFIRM SCREEN ── */
+  .shein-confirm-hero {
+    background: linear-gradient(135deg, #fff0f5, #fce4ef);
+    border-radius: 10px; padding: 16px 14px; margin-bottom: 12px;
+    text-align: center; border: 1px solid #fce4ef;
+  }
+  .shein-confirm-card { background: white; border-radius: 8px; padding: 12px 14px; border: 1px solid #eee; margin-bottom: 10px; }
+  .shein-confirm-card-ttl { font-size: 0.62rem; font-weight: 800; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+
+  /* ── PROMO BANNER ── */
+  .shein-promo-banner {
+    background: linear-gradient(135deg, #e8427c, #c0185a);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    overflow: hidden; position: relative;
+  }
+  .shein-promo-banner::after { content: ''; position: absolute; right: -15px; top: -15px; width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+  .shein-promo-hl { font-size: 1rem; font-weight: 900; color: white; line-height: 1.1; font-family: 'Arial Black', sans-serif; }
+  .shein-promo-sub { font-size: 0.62rem; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 1px; }
+  .shein-promo-cta { margin-left: auto; background: white; color: #e8427c; font-size: 0.62rem; font-weight: 800; padding: 4px 10px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; z-index: 1; }
 </style>
 </head>
 <body>
@@ -765,15 +1322,32 @@
 
 <nav>
   <span class="nav-brand">IHC · Shein · Wiki Colaborativa</span>
-  <ul class="nav-links">
-    <li><a href="#sistema">Sistema</a></li>
-    <li><a href="#persona">Persona</a></li>
-    <li><a href="#diagnostico">Diagnóstico</a></li>
-    <li><a href="#telas">Telas</a></li>
-    <li><a href="#criterios">Critérios</a></li>
-    <li><a href="#compatibilidade">Compatibilidade</a></li>
-    <li><a href="#prototipo-interativo">Protótipo</a></li>
-    <li><a href="#comentarios-wiki-c1">Comentários</a></li>
+  <ul class="nav-cycles">
+    <li class="nav-cycle" data-cycle="1">
+      <button type="button" class="nav-cycle-toggle" aria-expanded="false" aria-controls="submenu-ciclo-1">Ciclo 1</button>
+      <ul class="nav-submenu" id="submenu-ciclo-1">
+        <li><a href="#sistema-11"><span class="nav-submenu-num">1.1</span> Sistema escolhido</a></li>
+        <li><a href="#publico-12"><span class="nav-submenu-num">1.2</span> Público-alvo</a></li>
+        <li><a href="#persona"><span class="nav-submenu-num">1.3</span> Persona</a></li>
+        <li><a href="#diagnostico"><span class="nav-submenu-num">1.4</span> Diagnóstico heurístico</a></li>
+        <li><a href="#telas"><span class="nav-submenu-num">1.5</span> Telas originais</a></li>
+        <li><a href="#criterios"><span class="nav-submenu-num">1.6</span> Critérios 3.3, 3.5 e 3.8</a></li>
+        <li><a href="#compatibilidade"><span class="nav-submenu-num">1.7</span> Compatibilidade (BR)</a></li>
+        <li><a href="#prototipo-ciclo-1"><span class="nav-submenu-num">1.8</span> Protótipo interativo</a></li>
+        <li><a href="#comentarios-wiki-c1"><span class="nav-submenu-num">1.9</span> Comentários na wiki</a></li>
+      </ul>
+    </li>
+    <li class="nav-cycle" data-cycle="2">
+      <button type="button" class="nav-cycle-toggle" aria-expanded="false" aria-controls="submenu-ciclo-2">Ciclo 2</button>
+      <ul class="nav-submenu" id="submenu-ciclo-2">
+        <li><a href="#ciclo-2-analise"><span class="nav-submenu-num">2.0</span> Análise das mudanças</a></li>
+        <li><a href="#prototipo-ciclo-2"><span class="nav-submenu-num">2.1</span> Protótipo refinado</a></li>
+        <li><a href="#comentarios-wiki-c2"><span class="nav-submenu-num">2.2</span> Comentários na wiki</a></li>
+      </ul>
+    </li>
+    <li class="nav-cycle" data-cycle="3">
+      <a href="#ciclo-3" class="nav-cycle-link">Ciclo 3</a>
+    </li>
   </ul>
 </nav>
 
@@ -807,7 +1381,7 @@
       <span class="section-num">1.1–1.2 · Sistema e público-alvo</span>
     </div>
 
-    <h2 class="section-title">1.1 Sistema <span>Escolhido</span></h2>
+    <h2 class="section-title" id="sistema-11">1.1 Sistema <span>Escolhido</span></h2>
     <p class="section-desc">
       O sistema avaliado é o <strong>aplicativo móvel da Shein</strong>, plataforma global de e-commerce com foco em moda e produtos de baixo custo.
       A análise concentra-se no <strong>fluxo de conclusão de compra</strong>, especificamente a partir do botão "Continuar Compra" e as etapas de checkout subsequentes.
@@ -833,7 +1407,7 @@
       </ol>
     </div>
 
-    <h2 class="section-title" style="margin-top:56px;">1.2 Público <span>Alvo</span></h2>
+    <h2 class="section-title" id="publico-12" style="margin-top:56px;">1.2 Público <span>Alvo</span></h2>
     <p class="section-desc">O aplicativo Shein atende um público amplo, com forte concentração em três perfis de usuário:</p>
 
     <div style="display:grid; gap:14px;">
@@ -1230,27 +1804,23 @@
   </div>
 </section>
 
-<section id="prototipo-interativo">
+<section id="prototipo-ciclo-1">
   <div class="container">
     <div class="section-label">
       <span class="cycle-badge">CICLO 1</span>
       <span class="section-num">1.8 · Protótipo Interativo Funcional</span>
     </div>
-    <h2 class="section-title">1.8 Protótipo <span>Interativo</span> de Solução</h2>
+    <h2 class="section-title">1.8 Protótipo <span>Interativo</span> — Ciclo 1</h2>
     <p class="section-desc">
-      Este protótipo resolve os problemas heurísticos mapeados introduzindo <strong>etapas claras e explícitas</strong>, <strong>rotas de saída seguras</strong> e <strong>maior adaptabilidade</strong> ao padrão mental de compra no Brasil.
-      <br><br>👉 <strong>Interaja com a tela do celular abaixo para testar o novo fluxo:</strong>
+      Primeira versão do protótipo apresentada na wiki, com <strong>etapas de revisão e pagamento separadas</strong>, <strong>rotas de saída</strong> e o modo <strong>"Modo Checkout Rápido"</strong> como resposta inicial aos problemas P1–P4.
+      <br><br>👉 <strong>Interaja com a tela do celular abaixo para testar esta versão:</strong>
     </p>
 
-    <div style="text-align:center; margin-bottom: 20px; font-size: 0.9rem; color: var(--dark3); background: var(--blue-light); padding: 12px; border-radius: 8px; max-width: 600px; margin-left: auto; margin-right: auto; border: 1px solid var(--blue);">
-      👩 <strong>Cenário de uso:</strong> Ana Paula está no transporte público com atenção dividida e precisa comprar um vestido rapidamente em uma promoção relâmpago antes de perder sua parada.
-    </div>
-
     <div class="mockup-container">
-      <div class="phone-mockup">
+<div class="phone-mockup proto-c1">
         <div class="phone-notch"></div>
         
-        <div id="step-cart" class="proto-step active">
+        <div id="step-cart-c1" class="proto-step active">
           <div class="phone-header">
             <span>Carrinho (1)</span>
             <span style="font-size:0.85rem; color:var(--text-light); font-weight:500;">Ajuda</span>
@@ -1270,43 +1840,27 @@
               <span>Total:</span>
               <span style="color:var(--pink-dark); font-size:1.1rem;">R$ 150,23</span>
             </div>
-            <button class="btn-primary" onclick="goToStep('step-review')">Avançar para Revisão</button>
+            <button class="btn-primary" onclick="goToStep('step-review-c1')">Avançar para Revisão</button>
           </div>
         </div>
 
-        <div id="step-review" class="proto-step">
+        <div id="step-review-c1" class="proto-step">
           <div class="phone-header">
-            <span style="cursor:pointer;" onclick="goToStep('step-cart')">←</span>
+            <span style="cursor:pointer;" onclick="goToStep('step-cart-c1')">←</span>
             <span>Revisão do Pedido</span>
             <span style="width:20px;"></span>
           </div>
-          <div class="progress-bar-ui">
-            Carrinho <span style="color:var(--pink);">→</span> <span style="color:var(--dark); font-weight:800;">Revisão</span> <span style="color:var(--pink);">→</span> Pagamento
-            <span class="fix-badge">Corrige P4</span>
-          </div>
-          <div class="phone-body" id="review-body">
+          <div class="phone-body review-body">
             
-            <div class="fast-checkout-toggle" onclick="toggleFastCheckout()" style="display:flex; flex-direction:column; gap:8px; align-items:stretch;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; color:var(--pink-dark); font-weight:700; display:flex; align-items:center;">Comprar com 1 clique <span class="fix-badge">Corrige P3</span></span>
-                <div class="toggle-switch"><div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px;"></div></div>
-              </div>
-              <span style="font-size:0.7rem; color:var(--text-light); font-weight:500;">(Endereço e pagamento salvos) - Simplifica para agilidade.</span>
+            <div class="fast-checkout-toggle" onclick="toggleFastCheckout(this)">
+              <span>Modo Checkout Rápido</span>
+              <div class="toggle-switch"></div>
             </div>
 
             <div class="summary-card">
               <div class="summary-title">📍 Endereço de Entrega</div>
-              <div style="color:var(--text); font-weight:600; margin-bottom:4px;">Ana Paula</div>
-              <div style="color:var(--text-light); line-height:1.4;">Avenida Central, Apto 403 B<br>São Paulo, SP</div>
-            </div>
-
-            <!-- Aplicando agrupamento do Arthur -->
-            <div class="summary-card">
-              <div class="summary-title">💳 Forma de Pagamento Prévia</div>
-              <div class="summary-row" style="margin-bottom:0;">
-                <span style="color:var(--text); font-weight:600;">Método: Pix</span> 
-                <span style="color:var(--pink); font-size:0.8rem; font-weight:600; cursor:pointer;">Alterar</span>
-              </div>
+              <div style="color:var(--text); font-weight:600; margin-bottom:4px;">Ivy Oliveira dos Reis</div>
+              <div style="color:var(--text-light); line-height:1.4;">Rua Armelindo Cesa Apto 403 B<br>Araranguá, SC - 88905-402</div>
             </div>
 
             <div class="summary-card">
@@ -1319,19 +1873,16 @@
             </div>
           </div>
           <div class="phone-footer">
-            <button class="btn-primary" onclick="goToStep('step-payment')">Ir para Pagamento</button>
-            <button class="btn-secondary" onclick="goToStep('step-cart')" style="color:var(--text-light); border:none; background:transparent;">Voltar ao Carrinho</button>
+            <button class="btn-primary" onclick="goToStep('step-payment-c1')">Ir para Pagamento</button>
+            <button class="btn-secondary" onclick="goToStep('step-cart-c1')" style="color:var(--text-light); border:none; background:transparent;">Voltar ao Carrinho</button>
           </div>
         </div>
 
-        <div id="step-payment" class="proto-step">
+        <div id="step-payment-c1" class="proto-step">
           <div class="phone-header">
-            <span style="cursor:pointer;" onclick="goToStep('step-review')">←</span>
+            <span style="cursor:pointer;" onclick="goToStep('step-review-c1')">←</span>
             <span>Pagamento</span>
             <span style="width:20px;"></span>
-          </div>
-          <div class="progress-bar-ui">
-            Carrinho <span style="color:var(--gray-mid);">→</span> Revisão <span style="color:var(--pink);">→</span> <span style="color:var(--dark); font-weight:800;">Pagamento</span>
           </div>
           <div class="phone-body">
             <div class="summary-card" style="text-align:center; padding:24px 16px;">
@@ -1351,24 +1902,24 @@
             </div>
           </div>
           <div class="phone-footer">
-            <button class="btn-primary" onclick="goToStep('step-success')">Finalizar Pedido Agora</button>
-            <button class="btn-secondary" onclick="goToStep('step-cart')" style="color:var(--red); border-color:var(--red-light); background:var(--red-light);">Cancelar Compra</button>
+            <button class="btn-primary" onclick="goToStep('step-success-c1')">Finalizar Pedido Agora</button>
+            <button class="btn-secondary" onclick="goToStep('step-cart-c1')" style="color:var(--red); border-color:var(--red-light); background:var(--red-light);">Cancelar Compra</button>
           </div>
         </div>
 
-        <div id="step-success" class="proto-step">
+        <div id="step-success-c1" class="proto-step">
           <div class="phone-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding-bottom:16px;">
             <div class="success-icon">✅</div>
             <div class="success-text">Pedido Confirmado!</div>
             <p style="font-size:0.85rem; color:var(--text-light); text-align:center; margin-bottom:24px;">Seu código Pix foi gerado com sucesso. O pedido <strong>#8924103</strong> já está registrado em sua conta.</p>
             
             <div class="summary-card" style="width:100%; text-align:center; border:2px dashed var(--gray-mid); background:var(--gray-light);">
-              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjB2MjhIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjBIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
               <div class="btn-primary" style="font-size:0.8rem; padding:10px;">Copiar Código Pix</div>
             </div>
           </div>
           <div class="phone-footer">
-            <button class="btn-secondary" onclick="goToStep('step-cart')">Voltar à Página Inicial</button>
+            <button class="btn-secondary" onclick="goToStep('step-cart-c1')">Voltar à Página Inicial</button>
           </div>
         </div>
 
@@ -1428,6 +1979,784 @@
   </div>
 </section>
 
+
+<section id="ciclo-2-analise">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge c2">CICLO 2</span>
+      <span class="section-num">2.0 · Análise das mudanças no protótipo</span>
+    </div>
+    <h2 class="section-title">2.0 Do protótipo 1 ao <span>protótipo 2</span></h2>
+    <p class="section-desc">
+      Após a rodada de comentários na wiki (seção 1.9), refinamos o protótipo do Ciclo 1 com base nos problemas heurísticos <strong>P1–P4</strong>, nos critérios <strong>3.3, 3.5 e 3.8</strong> e no feedback das duplas colegas. Esta seção documenta <strong>o que foi considerado</strong>, <strong>o que mudou</strong>, <strong>como foi implementado</strong> e exemplos visuais antes/depois.
+    </p>
+
+    <h3 class="wiki-subtitle">O que orientou o refinamento</h3>
+    <div class="feedback-pills">
+      <span class="feedback-pill">Arthur — agrupamento na revisão</span>
+      <span class="feedback-pill">Arthur/Theo — checkout rápido mais claro</span>
+      <span class="feedback-pill">Felipe — persona operacional (Ana Paula)</span>
+      <span class="feedback-pill">Diva/Artur — etapas e CTAs transparentes (P4)</span>
+    </div>
+
+    <table class="changes-summary-table">
+      <thead>
+        <tr>
+          <th>Problema / feedback</th>
+          <th>O que consideramos</th>
+          <th>O que mudou no Ciclo 2</th>
+          <th>Como foi feito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>P4</strong> · Modelo mental BR<br><em>(Diva, Artur, H1)</em></td>
+          <td>Usuária precisa saber em qual etapa está (carrinho → revisão → pagamento).</td>
+          <td>Barra de progresso fixa nas telas de revisão e pagamento.</td>
+          <td>Componente <code>progress-bar-ui</code> com etapa atual destacada e badge <span class="fix-badge">Corrige P4</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>P3</strong> · Adaptabilidade<br><em>(Arthur, Theo, 3.8)</em></td>
+          <td>"Modo Checkout Rápido" gerou dúvida; falta rota ágil para compradora frequente.</td>
+          <td>Renomeado para <strong>"Comprar com 1 clique"</strong> com texto explicativo.</td>
+          <td>Toggle em coluna com subtítulo sobre endereço/pagamento salvos e badge <span class="fix-badge">Corrige P3</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>P2</strong> · Gestão de erros<br><em>(Arthur — agrupamento)</em></td>
+          <td>Endereço, pagamento e itens misturados aumentam risco de erro na revisão.</td>
+          <td>Bloco separado <strong>"Forma de Pagamento Prévia"</strong> antes do resumo de itens.</td>
+          <td>Novo <code>summary-card</code> agrupando método Pix com opção "Alterar".</td>
+        </tr>
+        <tr>
+          <td><strong>Persona</strong><br><em>(Felipe, Theo)</em></td>
+          <td>Ana Paula não aparecia no fluxo; dados genéricos (Ivy) enfraqueciam o argumento.</td>
+          <td>Cenário de uso + endereço da Ana Paula em São Paulo.</td>
+          <td>Caixa de cenário acima do mockup; dados de entrega alinhados à persona 1.3.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="wiki-subtitle">Comparações visuais — antes e depois</h3>
+
+    <div class="proto-change-card">
+      <h4>1. Cenário de uso da persona <span class="fix-badge">Ana Paula</span></h4>
+      <p class="change-meta"><strong>Por quê:</strong> Felipe e Theo apontaram que a persona estava na análise, mas não no protótipo testável. Sem contexto, fica difícil avaliar P1 e P3 em situação de atenção dividida.</p>
+      <div class="proto-compare-row">
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-before">Ciclo 1</span>
+          <div class="compare-snapshot">
+            <div class="snap-missing">Sem cenário de uso acima do protótipo</div>
+            <p style="margin-top:8px;color:var(--text-light);">Avaliador abre o mockup sem saber o contexto da tarefa.</p>
+          </div>
+        </div>
+        <div class="proto-compare-arrow">→</div>
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-after">Ciclo 2</span>
+          <div class="compare-snapshot">
+            <div class="snap-scenario">👩 <strong>Cenário:</strong> Ana Paula no transporte público, atenção dividida, compra relâmpago antes da parada.</div>
+          </div>
+        </div>
+      </div>
+      <p class="change-how"><strong>Como foi feito:</strong> Inclusão de um bloco destacado (fundo azul) antes do celular interativo, narrando objetivo, contexto e urgência da usuária representativa.</p>
+    </div>
+
+    <div class="proto-change-card">
+      <h4>2. Visibilidade das etapas do fluxo <span class="fix-badge">Corrige P4</span></h4>
+      <p class="change-meta"><strong>Por quê:</strong> P4 trata da quebra do modelo mental brasileiro — o usuário não percebe quando está em revisão vs. pagamento. A barra devolve status do sistema (H1) e reforça o fluxo Carrinho → Revisão → Pagamento.</p>
+      <div class="proto-compare-row">
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-before">Ciclo 1 · Revisão</span>
+          <div class="compare-snapshot">
+            <div class="snap-header">Revisão do Pedido</div>
+            <div class="snap-missing">Sem indicador de etapas</div>
+            <div class="snap-toggle-c1">Modo Checkout Rápido ○</div>
+          </div>
+        </div>
+        <div class="proto-compare-arrow">→</div>
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-after">Ciclo 2 · Revisão</span>
+          <div class="compare-snapshot">
+            <div class="snap-header">Revisão do Pedido</div>
+            <div class="snap-progress">Carrinho → <strong>Revisão</strong> → Pagamento <span class="fix-badge">Corrige P4</span></div>
+            <div class="snap-toggle-c2"><strong>Comprar com 1 clique</strong> <span class="fix-badge">Corrige P3</span><br><span style="font-weight:500;color:var(--text-light);">(Endereço e pagamento salvos)</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="change-how"><strong>Como foi feito:</strong> Barra <code>progress-bar-ui</code> replicada na revisão e no pagamento, com a etapa ativa em negrito. Mesma barra na tela de pagamento com "Pagamento" destacado.</p>
+    </div>
+
+    <div class="proto-change-card">
+      <h4>3. Checkout rápido — nomenclatura e clareza <span class="fix-badge">Corrige P3</span></h4>
+      <p class="change-meta"><strong>Por quê:</strong> Theo sugeriu trocar "Modo Checkout Rápido" por "Comprar com 1 clique" com descritivo. O rótulo anterior não comunicava o benefício nem o pré-requisito (dados salvos).</p>
+      <div class="proto-compare-row">
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-before">Ciclo 1</span>
+          <div class="compare-snapshot">
+            <div class="snap-toggle-c1">
+              <span>Modo Checkout Rápido</span>
+              <span style="width:36px;height:20px;background:var(--pink);border-radius:99px;display:inline-block;"></span>
+            </div>
+            <p style="color:var(--text-light);font-size:0.72rem;">Uma linha, sem explicação do que o modo faz.</p>
+          </div>
+        </div>
+        <div class="proto-compare-arrow">→</div>
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-after">Ciclo 2</span>
+          <div class="compare-snapshot">
+            <div class="snap-toggle-c2">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span><strong>Comprar com 1 clique</strong> <span class="fix-badge">Corrige P3</span></span>
+                <span style="width:36px;height:20px;background:var(--pink);border-radius:99px;"></span>
+              </div>
+              <span style="font-size:0.7rem;color:var(--text-light);">(Endereço e pagamento salvos) - Simplifica para agilidade.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="change-how"><strong>Como foi feito:</strong> Layout em coluna no toggle; subtítulo explica o atalho; badge verde liga a intervenção ao P3. O toggle continua ocultando gamificação quando ativo (comportamento preservado do Ciclo 1).</p>
+    </div>
+
+    <div class="proto-change-card">
+      <h4>4. Agrupamento de endereço, pagamento e itens</h4>
+      <p class="change-meta"><strong>Por quê:</strong> Arthur recomendou agrupamento para distinguir blocos e reduzir equívocos na revisão — critério 3.5 (gestão de erros preventiva).</p>
+      <div class="proto-compare-row">
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-before">Ciclo 1</span>
+          <div class="compare-snapshot">
+            <div class="snap-card"><div class="snap-card-title">📍 Endereço</div> Ivy · Araranguá/SC</div>
+            <div class="snap-card"><div class="snap-card-title">🛍️ Itens + gamificação</div> Descontos e pontos no mesmo bloco</div>
+            <div class="snap-missing" style="margin-top:6px;">Sem bloco de pagamento na revisão</div>
+          </div>
+        </div>
+        <div class="proto-compare-arrow">→</div>
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-after">Ciclo 2</span>
+          <div class="compare-snapshot">
+            <div class="snap-card"><div class="snap-card-title">📍 Endereço</div> Ana Paula · São Paulo/SP</div>
+            <div class="snap-card"><div class="snap-card-title">💳 Pagamento prévio</div> Método: Pix · Alterar</div>
+            <div class="snap-card"><div class="snap-card-title">🛍️ Resumo dos itens</div> Valores separados do pagamento</div>
+          </div>
+        </div>
+      </div>
+      <p class="change-how"><strong>Como foi feito:</strong> Três <code>summary-card</code> sequenciais: entrega, pagamento e itens. Dados alinhados à persona; pagamento visível antes de avançar.</p>
+    </div>
+
+    <div class="scope-box" style="margin-top:8px;">
+      <div class="scope-header">📌 Síntese do Ciclo 2</div>
+      <p>O Ciclo 1 já introduzia <strong>revisão separada do pagamento</strong> e <strong>rotas de saída</strong> (voltar/cancelar). O Ciclo 2 não refaz o fluxo do zero: <strong>operacionaliza o feedback da wiki</strong> — torna a persona testável, explicita etapas (P4), clarifica o atalho de compra (P3) e melhora agrupamento na revisão (P2). O protótipo interativo completo está na seção <a href="#prototipo-ciclo-2" style="color:var(--pink-dark);font-weight:700;">2.1</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prototipo-ciclo-2">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge c2">CICLO 2</span>
+      <span class="section-num">2.1 · Protótipo Interativo Refinado</span>
+    </div>
+    <h2 class="section-title">2.1 Protótipo <span>Interativo</span> — Ciclo 2</h2>
+    <p class="section-desc">
+      Visual inspirado no app Shein. Selecione tamanho, cor, quantidade, aplique cupons, escolha entrega e forma de pagamento — como no aplicativo real.
+      <br><br>👉 <strong>Cenário:</strong> Ana Paula está no transporte com atenção dividida e precisa comprar um vestido em promoção relâmpago.
+    </p>
+
+    <div style="background:var(--blue-light); border:1px solid var(--blue); border-radius:8px; padding:10px 16px; max-width:420px; font-size:0.8rem; color:var(--dark3); text-align:center; margin:0 auto 28px;">
+      👆 Toque nos elementos: tamanho, cor, quantidade, cupons, métodos de pagamento e navegue pelas telas.
+    </div>
+
+    <div class="mockup-container">
+      <div class="phone-mockup proto-c2" id="mockup-c2">
+        <div class="phone-notch"></div>
+
+        <!-- ─── TELA 1: CARRINHO ─── -->
+        <div id="step-cart-c2" class="proto-step active">
+          <!-- SHEIN App Header -->
+          <div class="shein-app-hdr">
+            <button class="shein-hdr-btn" onclick="c2Toast('Menu SHEIN')">☰</button>
+            <div class="shein-logo-mark">SHEIN</div>
+            <div class="shein-hdr-icons">
+              <button class="shein-hdr-btn" onclick="c2Toast('Pesquisar produtos')">🔍</button>
+              <button class="shein-hdr-btn" onclick="c2Toast('Favoritos')">♡</button>
+              <div style="position:relative;">
+                <button class="shein-hdr-btn" onclick="c2Toast('Carrinho: 1 item')">🛍</button>
+                <span class="shein-hdr-badge">1</span>
+              </div>
+            </div>
+          </div>
+          <!-- Flash sale -->
+          <div class="shein-flash">
+            <span>⚡ PROMOÇÃO RELÂMPAGO</span>
+            <div class="shein-timer">
+              <span class="shein-tbox" id="c2-th">00</span>:<span class="shein-tbox" id="c2-tm">23</span>:<span class="shein-tbox" id="c2-ts">47</span>
+            </div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:160px;">
+            <!-- Product card -->
+            <div class="shein-pcard">
+              <div class="shein-prow">
+                <div class="shein-pimg2">👗</div>
+                <div style="flex:1; min-width:0;">
+                  <div class="shein-pname2">Vestido Casual Elegante de Verão Feminino Manga Curta Estampa Floral</div>
+                  <div class="shein-stars2">★★★★☆ <span style="color:#bbb; font-size:0.62rem;">(1.2k avaliações)</span></div>
+                  <div class="shein-pprices">
+                    <span class="shein-price-n" id="c2-price-display">R$ 114,55</span>
+                    <span class="shein-price-o">R$ 198,90</span>
+                    <span class="shein-disc2">-42%</span>
+                  </div>
+                  <span class="shein-free2">🚚 Frete grátis</span>
+                </div>
+              </div>
+              <div class="shein-opts">
+                <div class="shein-olbl">Tamanho: <strong id="c2-size-lbl" style="color:#1a1a1a; text-transform:none;">M</strong></div>
+                <div class="shein-sizes">
+                  <div class="shein-sz" onclick="c2Size(this,'PP')">PP</div>
+                  <div class="shein-sz" onclick="c2Size(this,'P')">P</div>
+                  <div class="shein-sz on" onclick="c2Size(this,'M')">M</div>
+                  <div class="shein-sz" onclick="c2Size(this,'G')">G</div>
+                  <div class="shein-sz" onclick="c2Size(this,'GG')">GG</div>
+                </div>
+                <div class="shein-olbl">Cor: <strong id="c2-color-lbl" style="color:#1a1a1a; text-transform:none;">Amarelo</strong></div>
+                <div class="shein-colors">
+                  <div class="shein-clr on" style="background:#fbbf24;" onclick="c2Color(this,'Amarelo')" title="Amarelo"></div>
+                  <div class="shein-clr" style="background:#f9fafb; border:1px solid #ccc;" onclick="c2Color(this,'Branco')" title="Branco"></div>
+                  <div class="shein-clr" style="background:#1a1a1a;" onclick="c2Color(this,'Preto')" title="Preto"></div>
+                  <div class="shein-clr" style="background:#e8427c;" onclick="c2Color(this,'Rosa')" title="Rosa"></div>
+                  <div class="shein-clr" style="background:#60a5fa;" onclick="c2Color(this,'Azul')" title="Azul"></div>
+                </div>
+                <div class="shein-olbl">Quantidade:</div>
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                  <div class="shein-qty">
+                    <button class="shein-qbtn" onclick="c2Qty(-1)">−</button>
+                    <div class="shein-qnum" id="c2-qty">1</div>
+                    <button class="shein-qbtn" onclick="c2Qty(1)">+</button>
+                  </div>
+                  <span style="font-size:0.67rem; color:#e8427c; font-weight:700;">⚠ Apenas 3 unid.!</span>
+                </div>
+              </div>
+            </div>
+            <!-- Shipping notice -->
+            <div style="background:#f0fff4; border:1px solid #bbf7d0; border-radius:7px; padding:8px 12px; margin-bottom:10px; font-size:0.72rem; color:#166534; display:flex; align-items:center; gap:7px;">
+              🚚 <span><strong>Frete Grátis</strong> para São Paulo, SP · Prev. 28 mai – 8 jun</span>
+            </div>
+            <!-- Coupon -->
+            <div class="shein-cpnrow" onclick="c2OpenCpn()">
+              <span>🎫</span>
+              <span style="flex:1; font-size:0.76rem; color:#333;" id="c2-cpn-txt">Adicionar cupom de desconto</span>
+              <span style="color:#bbb;">›</span>
+            </div>
+
+            <!-- ⚡ COMPRA EM 1 CLIQUE — destaque principal -->
+            <div class="shein-1click-cart" id="c2-1click-section" onclick="c2Toggle1ClickCart()">
+              <div class="shein-1click-cart-hdr">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.1rem;">⚡</span>
+                  <div>
+                    <div style="font-size:0.82rem; font-weight:800; color:#1a1a1a; display:flex; align-items:center; gap:6px;">
+                      Compra em 1 Clique
+                      <span class="shein-1click-badge">NOVO</span>
+                    </div>
+                    <div style="font-size:0.65rem; color:#888; margin-top:1px;">Usa seus dados salvos — pule o preenchimento</div>
+                  </div>
+                </div>
+                <div class="shein-tgl2" id="c2-cart-tgl"></div>
+              </div>
+              <!-- Preview expandido quando ativado -->
+              <div class="shein-1click-preview">
+                <div style="font-size:0.65rem; color:#e8427c; font-weight:700; margin-bottom:8px; text-align:center; letter-spacing:0.3px;">✓ DADOS PRÉ-PREENCHIDOS — só confirmar!</div>
+                <div class="shein-1click-data">
+                  <span style="font-size:0.9rem; flex-shrink:0; margin-top:1px;">📍</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.74rem; color:#1a1a1a;">Ana Paula Santos</div>
+                    <div style="font-size:0.67rem; color:#666;">Av. Central, 1200, Apto 403 B — SP</div>
+                  </div>
+                </div>
+                <div class="shein-1click-data">
+                  <span style="font-size:0.9rem; flex-shrink:0; margin-top:1px;">💳</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.74rem; color:#1a1a1a;">💠 Pix <span style="color:#16a34a; font-size:0.64rem; font-weight:600;">(5% desconto)</span></div>
+                    <div style="font-size:0.67rem; color:#666;">Pago em até 30 minutos</div>
+                  </div>
+                </div>
+                <div class="shein-1click-data">
+                  <span style="font-size:0.9rem; flex-shrink:0; margin-top:1px;">🚚</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.74rem; color:#16a34a;">Frete Grátis</div>
+                    <div style="font-size:0.67rem; color:#666;">Entrega Padrão · 28 mai – 8 jun</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checkout bar + bottom nav -->
+          <div class="shein-cart-btm">
+            <div class="shein-checkout-bar">
+              <div class="shein-foot-tot" style="margin-bottom:7px;">
+                <span class="shein-foot-lbl">Total (<span id="c2-qty-lbl">1</span> item):</span>
+                <span class="shein-foot-val" id="c2-total">R$ 114,55</span>
+              </div>
+              <button class="btn-shein" id="c2-checkout-btn" onclick="c2Checkout()">Continuar Compra</button>
+            </div>
+            <div class="shein-bnav">
+              <div class="shein-bnav-item" onclick="c2Toast('Ir para Início')">
+                <span class="shein-bnav-icon">🏠</span>
+                <div class="shein-bnav-lbl">Início</div>
+              </div>
+              <div class="shein-bnav-item" onclick="c2Toast('Categorias')">
+                <span class="shein-bnav-icon">☰</span>
+                <div class="shein-bnav-lbl">Categorias</div>
+              </div>
+              <div class="shein-bnav-item" style="flex:0.8;" onclick="c2Toast('SHEIN Home')">
+                <div class="shein-bnav-logo">SHEIN</div>
+                <div class="shein-bnav-lbl" style="color:#1a1a1a; font-weight:800;">.</div>
+              </div>
+              <div class="shein-bnav-item bnav-on">
+                <span class="shein-bnav-icon">🛍<span class="shein-bnav-badge">1</span></span>
+                <div class="shein-bnav-lbl" style="color:#e8427c;">Carrinho</div>
+              </div>
+              <div class="shein-bnav-item" onclick="c2Toast('Minha conta')">
+                <span class="shein-bnav-icon">👤</span>
+                <div class="shein-bnav-lbl">Minha conta</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coupon popup -->
+          <div class="shein-overlay2" id="c2-overlay" onclick="c2CloseCpn()"></div>
+          <div class="shein-cpnpop2" id="c2-cpnpop">
+            <div class="shein-pop-hdl"></div>
+            <div class="shein-pop-ttl">Cupons disponíveis</div>
+            <div class="shein-cpn-irow">
+              <input type="text" class="shein-cpn-i" id="c2-cpn-input" placeholder="CÓDIGO DO CUPOM" maxlength="12">
+              <button class="shein-cpn-abtn" onclick="c2ApplyCpnInput()">Aplicar</button>
+            </div>
+            <div class="shein-ac2" onclick="c2ApplyCpn('SHEIN10','10% de desconto')">
+              <div style="flex:1;"><div class="shein-ac-code2">SHEIN10</div><div class="shein-ac-desc2">10% de desconto acima de R$ 80</div></div>
+              <div style="font-size:0.7rem; color:#e8427c; font-weight:700;">Usar →</div>
+            </div>
+            <div class="shein-ac2" onclick="c2ApplyCpn('FRETE0','Frete grátis extra')">
+              <div style="flex:1;"><div class="shein-ac-code2">FRETE0</div><div class="shein-ac-desc2">Frete grátis sem valor mínimo</div></div>
+              <div style="font-size:0.7rem; color:#e8427c; font-weight:700;">Usar →</div>
+            </div>
+            <button class="btn-shein out2" style="margin-top:10px;" onclick="c2CloseCpn()">Fechar</button>
+          </div>
+          <div class="shein-toast3" id="c2-toast"></div>
+        </div>
+
+        <!-- ─── TELA 1B: CONFIRMAÇÃO RÁPIDA (1 CLIQUE) ─── -->
+        <div id="step-1click-c2" class="proto-step">
+          <div class="shein-hdr">
+            <button class="shein-back" onclick="goToStep('step-cart-c2')">←</button>
+            <div class="shein-ttl">⚡ Confirmação Rápida</div>
+            <div style="width:28px;"></div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
+            <!-- Hero -->
+            <div class="shein-confirm-hero">
+              <div style="font-size:1.6rem; margin-bottom:6px;">⚡</div>
+              <div style="font-size:0.9rem; font-weight:800; color:#e8427c; margin-bottom:3px;">Compra em 1 Clique ativada!</div>
+              <div style="font-size:0.72rem; color:#888; line-height:1.5;">Seus dados salvos foram pré-preenchidos.<br>Confira e confirme — sem distrações.</div>
+            </div>
+
+            <!-- Produto -->
+            <div class="shein-confirm-card">
+              <div class="shein-confirm-card-ttl">🛍 Seu pedido</div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <div class="shein-pimg2" style="width:52px; height:64px; font-size:1.3rem; flex-shrink:0;">👗</div>
+                <div style="flex:1;">
+                  <div class="shein-pname2" style="font-weight:600; font-size:0.75rem;">Vestido Casual Elegante de Verão</div>
+                  <div style="font-size:0.67rem; color:#888; margin:3px 0;">Cor: <span id="c1k-color">Amarelo</span> · Tam: <span id="c1k-size">M</span> · Qtd: <span id="c1k-qty">1</span></div>
+                  <div class="shein-price-n" style="font-size:0.9rem;" id="c1k-price">R$ 108,82</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Endereço -->
+            <div class="shein-confirm-card">
+              <div class="shein-confirm-card-ttl">📍 Endereço de entrega</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#1a1a1a; margin-bottom:2px;">Ana Paula Santos</div>
+              <div style="font-size:0.72rem; color:#666; line-height:1.5;">Avenida Central, 1200, Apto 403 B<br>São Paulo, SP — 01310-100</div>
+              <div style="margin-top:6px; font-size:0.7rem; color:#16a34a; font-weight:700;">🚚 Entrega Padrão · Grátis · 5–12 dias úteis</div>
+            </div>
+
+            <!-- Pagamento -->
+            <div class="shein-confirm-card">
+              <div class="shein-confirm-card-ttl">💳 Pagamento</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:0.8rem; font-weight:700; color:#1a1a1a;">💠 Pix</div>
+                  <div style="font-size:0.67rem; color:#16a34a; font-weight:600; margin-top:1px;">5% de desconto aplicado</div>
+                </div>
+                <div class="shein-price-n" style="font-size:0.95rem;" id="c1k-paytotal">R$ 108,82</div>
+              </div>
+            </div>
+
+            <!-- Nota legal -->
+            <div style="background:white; border-radius:8px; padding:9px 12px; border:1px solid #eee; margin-bottom:10px; font-size:0.69rem; color:#999; text-align:center; line-height:1.5;">
+              Ao confirmar, você aceita os <span style="color:#e8427c; font-weight:700;">Termos de Serviço</span> da SHEIN e confirma o pagamento via Pix.
+            </div>
+
+            <!-- Link para fluxo manual -->
+            <div style="text-align:center;">
+              <button onclick="c2GoManual()" style="background:none; border:none; font-size:0.75rem; color:#888; cursor:pointer; text-decoration:underline; font-family:var(--font); line-height:2;">
+                Prefiro preencher os dados manualmente →
+              </button>
+            </div>
+          </div>
+          <div class="shein-foot">
+            <div class="shein-foot-tot">
+              <span class="shein-foot-lbl">Total (Pix · 5% off):</span>
+              <span class="shein-foot-val" id="c1k-footer-total">R$ 108,82</span>
+            </div>
+            <button class="btn-shein pink2" onclick="c2PlaceOrder()">⚡ Confirmar Pedido</button>
+          </div>
+        </div>
+
+        <!-- ─── TELA 2: ENDEREÇO ─── -->
+        <div id="step-address-c2" class="proto-step">
+          <div class="shein-hdr">
+            <button class="shein-back" onclick="goToStep('step-cart-c2')">←</button>
+            <div class="shein-ttl">Endereço de Entrega</div>
+            <div style="width:28px;"></div>
+          </div>
+          <div class="shein-steps">
+            <div class="shein-step dn"><div class="shein-step-dot">✓</div>Carrinho</div>
+            <div class="shein-step-line dn"></div>
+            <div class="shein-step act"><div class="shein-step-dot">2</div>Endereço</div>
+            <div class="shein-step-line"></div>
+            <div class="shein-step"><div class="shein-step-dot">3</div>Pagamento</div>
+            <div class="shein-step-line"></div>
+            <div class="shein-step"><div class="shein-step-dot">4</div>Revisão</div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
+            <!-- Promo banner - aparece só no fluxo manual -->
+            <div class="shein-promo-banner" onclick="c2ApplyCpn('PIX10','10% no Pix hoje'); c2Toast('Cupom PIX10 aplicado! Use no pagamento.')">
+              <div>
+                <div class="shein-promo-hl">PIX10</div>
+                <div class="shein-promo-sub">10% de desconto no Pix · só hoje!</div>
+              </div>
+              <div style="font-size:1.1rem; z-index:1;">💠</div>
+              <div class="shein-promo-cta">Pegar cupom</div>
+            </div>
+            <div class="shein-acard">
+              <div class="shein-stitle2">📍 Endereço salvo <button class="shein-edit2" onclick="c2Toast('Edição disponível no app real')">Alterar</button></div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <input type="radio" name="c2-addr" checked style="margin-top:3px; accent-color:#e8427c; flex-shrink:0;">
+                <div>
+                  <div class="shein-aname2">Ana Paula Santos · (11) 98765-4321</div>
+                  <div class="shein-atxt2">Avenida Central, 1200, Apto 403 B<br>São Paulo, SP — 01310-100</div>
+                  <span class="shein-adef2">Padrão</span>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:right; margin-bottom:10px;">
+              <button onclick="c2Toast('+ Novo endereço adicionado!')" style="background:none; border:1px dashed #e8427c; border-radius:5px; padding:6px 12px; font-size:0.72rem; color:#e8427c; font-weight:700; cursor:pointer; font-family:var(--font);">+ Novo Endereço</button>
+            </div>
+            <div class="shein-acard">
+              <div class="shein-stitle2">🚚 Método de Entrega</div>
+              <div class="shein-dopt2 on" id="c2-dopt-std" onclick="c2SelectDelivery('standard',this)">
+                <div class="shein-dradio2"></div>
+                <div style="flex:1;">
+                  <div class="shein-dname2">Padrão — 5 a 12 dias úteis</div>
+                  <div class="shein-ddate2">Prev. 28 mai – 8 jun</div>
+                </div>
+                <div class="shein-dprice2 free">Grátis</div>
+              </div>
+              <div class="shein-dopt2" id="c2-dopt-exp" onclick="c2SelectDelivery('express',this)">
+                <div class="shein-dradio2"></div>
+                <div style="flex:1;">
+                  <div class="shein-dname2">Expresso — 3 a 5 dias úteis</div>
+                  <div class="shein-ddate2">Prev. 22–24 mai</div>
+                </div>
+                <div class="shein-dprice2">R$ 19,90</div>
+              </div>
+            </div>
+            <div class="shein-psum">
+              <div class="shein-stitle2" style="margin-bottom:10px;">Resumo</div>
+              <div class="shein-prow2"><span>Subtotal (1 item)</span><span>R$ 198,90</span></div>
+              <div class="shein-prow2"><span>Desconto produto</span><span class="shein-sav">- R$ 84,35</span></div>
+              <div class="shein-prow2" id="c2-delivery-row"><span>Frete</span><span class="shein-sav">Grátis</span></div>
+              <div class="shein-prow2" id="c2-cpn-row" style="display:none;"><span>Cupom (<span id="c2-cpn-lbl2"></span>)</span><span class="shein-sav">- R$ 11,46</span></div>
+              <div class="shein-prow2 tot"><span>Total</span><span id="c2-addr-total">R$ 114,55</span></div>
+            </div>
+          </div>
+          <div class="shein-foot">
+            <div class="shein-foot-tot">
+              <span class="shein-foot-lbl">Total:</span>
+              <span class="shein-foot-val" id="c2-addr-ftotal">R$ 114,55</span>
+            </div>
+            <button class="btn-shein" onclick="goToStep('step-payment-c2')">Ir para Pagamento</button>
+          </div>
+        </div>
+
+        <!-- ─── TELA 3: PAGAMENTO ─── -->
+        <div id="step-payment-c2" class="proto-step">
+          <div class="shein-hdr">
+            <button class="shein-back" onclick="goToStep('step-address-c2')">←</button>
+            <div class="shein-ttl">Forma de Pagamento</div>
+            <div style="width:28px;"></div>
+          </div>
+          <div class="shein-steps">
+            <div class="shein-step dn"><div class="shein-step-dot">✓</div>Carrinho</div>
+            <div class="shein-step-line dn"></div>
+            <div class="shein-step dn"><div class="shein-step-dot">✓</div>Endereço</div>
+            <div class="shein-step-line dn"></div>
+            <div class="shein-step act"><div class="shein-step-dot">3</div>Pagamento</div>
+            <div class="shein-step-line"></div>
+            <div class="shein-step"><div class="shein-step-dot">4</div>Revisão</div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
+            <div class="shein-1clk" onclick="c2Toggle1Click(this)">
+              <span style="font-size:1rem;">⚡</span>
+              <div style="flex:1;">
+                <div style="font-size:0.78rem; font-weight:700; color:#1a1a1a;">Compra com 1 clique</div>
+                <div style="font-size:0.65rem; color:#888;">Usa endereço e pagamento padrão</div>
+              </div>
+              <div class="shein-tgl2" id="c2-1clk-tgl"></div>
+            </div>
+            <div class="shein-acard" style="padding:12px;">
+              <div class="shein-stitle2" style="margin-bottom:10px;">Selecione o pagamento:</div>
+              <div class="shein-payopt2 on" id="c2-pay-pix" onclick="c2SelectPay(this,'pix')">
+                <div class="shein-payopt-hdr2">
+                  <div id="c2-radio-pix" style="width:15px; height:15px; border-radius:50%; border:2px solid #e8427c; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:7px; height:7px; background:#e8427c; border-radius:50%;"></div>
+                  </div>
+                  <span class="shein-payicon2">💠</span>
+                  <div style="flex:1;">
+                    <div class="shein-payname2">Pix</div>
+                    <div class="shein-paydesc2" style="color:#16a34a; font-weight:700;">5% de desconto imediato</div>
+                  </div>
+                  <span style="background:#f0fff4; color:#16a34a; font-size:0.6rem; font-weight:800; padding:1px 5px; border-radius:3px; border:1px solid #bbf7d0;">-5%</span>
+                </div>
+                <div class="shein-payext2">
+                  <div class="shein-payext-in" style="display:flex; gap:10px; align-items:center;">
+                    <div style="width:56px; height:56px; background:#f0f0f0; border-radius:5px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:#888; border:1px solid #ddd; flex-shrink:0; text-align:center; font-weight:600;">QR<br>Code</div>
+                    <div style="font-size:0.7rem; color:#666; line-height:1.5;">Escaneie após confirmar. Válido por <strong>30 min</strong>. Total com desconto Pix: <strong style="color:#e8427c;" id="c2-pix-preview">R$ 108,82</strong></div>
+                  </div>
+                </div>
+              </div>
+              <div class="shein-payopt2" id="c2-pay-card" onclick="c2SelectPay(this,'card')">
+                <div class="shein-payopt-hdr2">
+                  <div id="c2-radio-card" style="width:15px; height:15px; border-radius:50%; border:2px solid #ddd; flex-shrink:0;"></div>
+                  <span class="shein-payicon2">💳</span>
+                  <div style="flex:1;">
+                    <div class="shein-payname2">Cartão de Crédito</div>
+                    <div class="shein-paydesc2">Visa · Mastercard · Elo · Hipercard</div>
+                  </div>
+                  <span style="font-size:0.68rem; color:#888;">até 12x</span>
+                </div>
+                <div class="shein-payext2">
+                  <div class="shein-payext-in">
+                    <input type="text" class="shein-inp2" placeholder="Número do cartão" maxlength="19">
+                    <input type="text" class="shein-inp2" placeholder="Nome como no cartão">
+                    <div class="shein-inp2-row">
+                      <input type="text" class="shein-inp2" placeholder="MM/AA" maxlength="5" style="margin-bottom:0;">
+                      <input type="text" class="shein-inp2" placeholder="CVV" maxlength="3" style="margin-bottom:0;">
+                    </div>
+                    <select class="shein-inp2" style="appearance:auto; margin-top:6px;">
+                      <option>1x sem juros — R$ 114,55</option>
+                      <option>2x sem juros — R$ 57,28</option>
+                      <option>3x sem juros — R$ 38,18</option>
+                      <option>6x sem juros — R$ 19,09</option>
+                      <option>12x com juros — R$ 11,23</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="shein-payopt2" id="c2-pay-boleto" onclick="c2SelectPay(this,'boleto')">
+                <div class="shein-payopt-hdr2">
+                  <div id="c2-radio-boleto" style="width:15px; height:15px; border-radius:50%; border:2px solid #ddd; flex-shrink:0;"></div>
+                  <span class="shein-payicon2">📄</span>
+                  <div style="flex:1;">
+                    <div class="shein-payname2">Boleto Bancário</div>
+                    <div class="shein-paydesc2">Vence em 3 dias úteis</div>
+                  </div>
+                </div>
+                <div class="shein-payext2">
+                  <div class="shein-payext-in" style="font-size:0.72rem; color:#666; line-height:1.5;">Boleto gerado após confirmação. Reconhecido em até <strong>2 dias úteis</strong> após o pagamento.</div>
+                </div>
+              </div>
+            </div>
+            <div class="shein-psum">
+              <div class="shein-prow2"><span>Subtotal</span><span id="c2-pay-sub">R$ 114,55</span></div>
+              <div class="shein-prow2" id="c2-pix-disc-row"><span>Desconto Pix (5%)</span><span class="shein-sav">- R$ 5,73</span></div>
+              <div class="shein-prow2" id="c2-cpn-row2" style="display:none;"><span>Cupom (<span id="c2-cpn-lbl3"></span>)</span><span class="shein-sav">- R$ 11,46</span></div>
+              <div class="shein-prow2 tot"><span>Total</span><span id="c2-pay-total">R$ 108,82</span></div>
+            </div>
+          </div>
+          <div class="shein-foot">
+            <div class="shein-foot-tot">
+              <span class="shein-foot-lbl">Total a pagar:</span>
+              <span class="shein-foot-val" id="c2-pay-ftotal">R$ 108,82</span>
+            </div>
+            <button class="btn-shein" onclick="goToStep('step-review-final-c2')">Revisar Pedido →</button>
+          </div>
+        </div>
+
+        <!-- ─── TELA 4: REVISÃO FINAL ─── -->
+        <div id="step-review-final-c2" class="proto-step">
+          <div class="shein-hdr">
+            <button class="shein-back" onclick="goToStep('step-payment-c2')">←</button>
+            <div class="shein-ttl">Revisar Pedido</div>
+            <div style="width:28px;"></div>
+          </div>
+          <div class="shein-steps">
+            <div class="shein-step dn"><div class="shein-step-dot">✓</div>Carrinho</div>
+            <div class="shein-step-line dn"></div>
+            <div class="shein-step dn"><div class="shein-step-dot">✓</div>Endereço</div>
+            <div class="shein-step-line dn"></div>
+            <div class="shein-step dn"><div class="shein-step-dot">✓</div>Pagamento</div>
+            <div class="shein-step-line dn"></div>
+            <div class="shein-step act"><div class="shein-step-dot">4</div>Revisão</div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:100px;">
+            <div class="shein-acard">
+              <div class="shein-stitle2">🛍️ Meu Pedido</div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <div class="shein-pimg2" style="width:56px; height:72px; font-size:1.5rem; flex-shrink:0;">👗</div>
+                <div>
+                  <div class="shein-pname2" style="font-weight:600;">Vestido Casual Elegante de Verão Feminino</div>
+                  <div style="font-size:0.68rem; color:#888; margin:3px 0;">Cor: <span id="rev-color">Amarelo</span> · Tam: <span id="rev-size">M</span> · Qtd: <span id="rev-qty">1</span></div>
+                  <div class="shein-price-n" style="font-size:0.88rem;" id="rev-price">R$ 114,55</div>
+                </div>
+              </div>
+            </div>
+            <div class="shein-acard">
+              <div class="shein-stitle2">📍 Entrega <button class="shein-edit2" onclick="goToStep('step-address-c2')">Editar</button></div>
+              <div class="shein-atxt2">Ana Paula Santos<br>Avenida Central, 1200, Apto 403 B — São Paulo, SP</div>
+              <div style="margin-top:6px; font-size:0.72rem; color:#16a34a; font-weight:600;" id="rev-delivery">🚚 Padrão · Grátis · 5-12 dias úteis</div>
+            </div>
+            <div class="shein-acard">
+              <div class="shein-stitle2">💳 Pagamento <button class="shein-edit2" onclick="goToStep('step-payment-c2')">Editar</button></div>
+              <div style="font-size:0.8rem; font-weight:600; color:#333;" id="rev-payment">💠 Pix (5% de desconto)</div>
+            </div>
+            <div class="shein-psum">
+              <div class="shein-prow2"><span>Subtotal (1 item)</span><span>R$ 198,90</span></div>
+              <div class="shein-prow2"><span>Desconto produto (-42%)</span><span class="shein-sav">- R$ 84,35</span></div>
+              <div class="shein-prow2" id="rev-delivery-cost"><span>Frete</span><span class="shein-sav">Grátis</span></div>
+              <div class="shein-prow2" id="rev-pix-disc"><span>Desconto Pix (5%)</span><span class="shein-sav">- R$ 5,73</span></div>
+              <div class="shein-prow2" id="rev-cpn-row" style="display:none;"><span>Cupom</span><span class="shein-sav">- R$ 11,46</span></div>
+              <div class="shein-prow2 tot"><span>Total</span><span id="rev-total">R$ 108,82</span></div>
+            </div>
+          </div>
+          <div class="shein-foot">
+            <div class="shein-foot-tot">
+              <span class="shein-foot-lbl">Total:</span>
+              <span class="shein-foot-val" id="rev-ftotal">R$ 108,82</span>
+            </div>
+            <button class="btn-shein pink2" onclick="c2PlaceOrder()">✓ Confirmar Pedido</button>
+          </div>
+        </div>
+
+        <!-- ─── TELA 5: SUCESSO ─── -->
+        <div id="step-success-c2" class="proto-step">
+          <div class="shein-hdr">
+            <div style="width:28px;"></div>
+            <div class="shein-ttl" style="color:#22c55e;">✓ Pedido Confirmado</div>
+            <div style="width:28px;"></div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
+            <div class="shein-succ">
+              <div class="shein-succ-ic">✅</div>
+              <div class="shein-succ-ttl">Pedido realizado com sucesso!</div>
+              <div class="shein-succ-sub">Obrigada pela compra, Ana Paula.<br>Acompanhe o status abaixo.</div>
+              <div class="shein-order-box">
+                <div class="shein-order-lbl">Número do pedido</div>
+                <div class="shein-order-id">#SHEIN-8924103</div>
+              </div>
+              <div id="c2-pix-block" style="width:100%; background:white; border-radius:7px; border:1px solid #eee; padding:12px; margin-bottom:12px; text-align:center;">
+                <div style="font-size:0.72rem; font-weight:700; color:#1a1a1a; margin-bottom:8px;">Pague com Pix em até 30 minutos</div>
+                <div style="width:90px; height:90px; background:#f0f0f0; border-radius:5px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:#888; border:1px solid #ddd; font-weight:600;">QR Code</div>
+                <button class="btn-shein" style="font-size:0.78rem; padding:9px;" onclick="c2Toast('Código Pix copiado!')">📋 Copiar código Pix</button>
+              </div>
+              <div class="shein-track">
+                <div style="font-size:0.78rem; font-weight:800; color:#1a1a1a; margin-bottom:10px;">Status do pedido</div>
+                <div class="shein-track-row">
+                  <div class="shein-tdot dn"></div>
+                  <div><div class="shein-ttext">Pedido registrado</div><div class="shein-tdate">Hoje · 14h32</div></div>
+                </div>
+                <div class="shein-track-row">
+                  <div class="shein-tdot act"></div>
+                  <div><div class="shein-ttext">Aguardando pagamento</div><div class="shein-tdate" id="c2-pay-method-status">Pix — confirma em minutos</div></div>
+                </div>
+                <div class="shein-track-row">
+                  <div class="shein-tdot"></div>
+                  <div><div class="shein-ttext">Em separação</div><div class="shein-tdate">Prev. 20 mai</div></div>
+                </div>
+                <div class="shein-track-row">
+                  <div class="shein-tdot"></div>
+                  <div><div class="shein-ttext">Em transporte</div><div class="shein-tdate">Prev. 21–27 mai</div></div>
+                </div>
+                <div class="shein-track-row">
+                  <div class="shein-tdot"></div>
+                  <div><div class="shein-ttext" style="color:#16a34a;">Entregue 🎉</div><div class="shein-tdate" id="c2-delivery-date-final">Prev. 28 mai – 8 jun</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="shein-foot">
+            <button class="btn-shein out2" onclick="c2RestartProto()">← Voltar ao início</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="comentarios-wiki-c2">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge c2">CICLO 2</span>
+      <span class="section-num">2.2 · Comentários na wiki</span>
+    </div>
+    <h2 class="section-title">2.2 Comentários sobre o <span>Ciclo 2</span></h2>
+    <p class="section-desc">
+      Registre aqui as <strong>perspectivas de outras duplas</strong> e a <strong>reflexão da nossa dupla</strong> sobre o protótipo refinado apresentado no Ciclo 2.
+    </p>
+    <h3 class="wiki-subtitle">Duas duplas colegas — perspectivas sobre o nosso Ciclo 2</h3>
+    <div class="wiki-slots-grid">
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Comentário 1 — (matrícula)</span>
+        <p class="wiki-slot-body"><em>Espaço reservado para o feedback da wiki sobre o protótipo refinado (Ciclo 2).</em></p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Comentário 2 — (matrícula)</span>
+        <p class="wiki-slot-body"><em>Espaço reservado.</em></p>
+      </div>
+    </div>
+    <h3 class="wiki-subtitle">Nossa dupla — reflexão sobre o Ciclo 2</h3>
+    <div class="our-duo-grid">
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Luís Antônio</span>
+        <p class="wiki-slot-body"><em>Reflexão sobre as mudanças do Ciclo 2 em relação ao feedback recebido.</em></p>
+      </div>
+      <div class="wiki-slot">
+        <span class="wiki-slot-label">Ivy Oliveira</span>
+        <p class="wiki-slot-body"><em>Reflexão sobre as mudanças do Ciclo 2 em relação ao feedback recebido.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ciclo-3">
+  <div class="container">
+    <div class="section-label">
+      <span class="cycle-badge c3">CICLO 3</span>
+      <span class="section-num">Em construção</span>
+    </div>
+    <h2 class="section-title">Ciclo <span>3</span></h2>
+    <p class="section-desc" style="text-align:center; max-width:560px; margin-left:auto; margin-right:auto;">
+      Esta etapa do trabalho ainda será desenvolvida na wiki colaborativa.
+    </p>
+    <div class="under-construction">
+      <div class="under-construction-icon">🚧</div>
+      <h3>Em construção</h3>
+      <p>O conteúdo do Ciclo 3 será adicionado em breve.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div><strong>Disciplina:</strong> Interface Humano Computador · IHC</div>
   <div><strong>Trabalho:</strong> Engenharia de Usabilidade — Aplicativo Shein · Fluxo de Conclusão de Compra</div>
@@ -1442,12 +2771,90 @@
     document.getElementById('progress-bar').style.width = scrolled + '%';
   });
 
+  // Menu por ciclo — clique abre/fecha; hover no desktop com pequeno atraso ao fechar
+  const navCycles = document.querySelectorAll('.nav-cycle');
+  let submenuCloseTimer = null;
+
+  function closeAllNavCycles() {
+    navCycles.forEach(c => {
+      c.classList.remove('is-open');
+      c.querySelector('.nav-cycle-toggle')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function positionNavSubmenu(cycle) {
+    const submenu = cycle.querySelector('.nav-submenu');
+    if (!submenu || window.matchMedia('(max-width: 720px)').matches) return;
+
+    const isC3 = cycle.dataset.cycle === '3';
+    submenu.style.left = isC3 ? 'auto' : '0';
+    submenu.style.right = isC3 ? '0' : 'auto';
+
+    requestAnimationFrame(() => {
+      const pad = 12;
+      const rect = submenu.getBoundingClientRect();
+      if (rect.right > window.innerWidth - pad) {
+        submenu.style.left = 'auto';
+        submenu.style.right = '0';
+      }
+      if (rect.left < pad) {
+        submenu.style.left = '0';
+        submenu.style.right = 'auto';
+      }
+    });
+  }
+
+  function openNavCycle(cycle) {
+    closeAllNavCycles();
+    cycle.classList.add('is-open');
+    cycle.querySelector('.nav-cycle-toggle')?.setAttribute('aria-expanded', 'true');
+    positionNavSubmenu(cycle);
+  }
+
+  window.addEventListener('resize', () => {
+    const open = document.querySelector('.nav-cycle.is-open');
+    if (open) positionNavSubmenu(open);
+  });
+
+  document.querySelectorAll('.nav-cycle-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const cycle = btn.closest('.nav-cycle');
+      if (cycle.classList.contains('is-open')) {
+        closeAllNavCycles();
+      } else {
+        openNavCycle(cycle);
+      }
+    });
+  });
+
+  navCycles.forEach(cycle => {
+    if (!cycle.querySelector('.nav-submenu')) return;
+    cycle.addEventListener('mouseenter', () => {
+      clearTimeout(submenuCloseTimer);
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        openNavCycle(cycle);
+      }
+    });
+    cycle.addEventListener('mouseleave', () => {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        submenuCloseTimer = setTimeout(closeAllNavCycles, 180);
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-cycle')) return;
+    closeAllNavCycles();
+  });
+
   // Smooth scroll for nav links
   document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
+        closeAllNavCycles();
         window.scrollTo({
           top: target.offsetTop - 70,
           behavior: 'smooth'
@@ -1458,30 +2865,258 @@
 
   // Lógica do Protótipo Interativo
   function goToStep(stepId) {
-    document.querySelectorAll('.proto-step').forEach(el => el.classList.remove('active'));
-    document.getElementById(stepId).classList.add('active');
+    const step = document.getElementById(stepId);
+    if (!step) return;
+    const mockup = step.closest('.phone-mockup');
+    mockup.querySelectorAll('.proto-step').forEach(el => el.classList.remove('active'));
+    step.classList.add('active');
   }
 
-  function toggleFastCheckout() {
-    const body = document.getElementById('review-body');
+  function toggleFastCheckout(toggleBtn) {
+    const mockup = toggleBtn.closest('.phone-mockup');
+    const body = mockup.querySelector('.review-body');
+    if (!body) return;
     body.classList.toggle('show-gamification');
-    const toggleBtn = document.querySelector('.fast-checkout-toggle');
     const switchEl = toggleBtn.querySelector('.toggle-switch');
-    
+    const isC1 = mockup.classList.contains('proto-c1');
+
     if (body.classList.contains('show-gamification')) {
       toggleBtn.style.background = 'white';
       toggleBtn.style.border = '1px solid var(--gray-mid)';
-      switchEl.style.background = 'var(--gray-mid)';
-      switchEl.style.justifyContent = 'flex-start';
-      switchEl.innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px;"></div>';
+      if (switchEl) {
+        switchEl.style.background = 'var(--gray-mid)';
+        if (!isC1) {
+          switchEl.style.justifyContent = 'flex-start';
+          switchEl.innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px;"></div>';
+        }
+      }
     } else {
       toggleBtn.style.background = 'var(--pink-light)';
       toggleBtn.style.border = '1px dashed var(--pink-mid)';
-      switchEl.style.background = 'var(--pink)';
-      switchEl.style.justifyContent = 'flex-end';
-      switchEl.innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px 2px 2px auto;"></div>';
+      if (switchEl) {
+        switchEl.style.background = 'var(--pink)';
+        if (!isC1) {
+          switchEl.style.justifyContent = 'flex-end';
+          switchEl.innerHTML = '<div style="width:18px; height:18px; background:white; border-radius:50%; margin:2px 2px 2px auto;"></div>';
+        }
+      }
     }
   }
+
+  // ── CICLO 2 — SHEIN INTERACTIVE PROTOTYPE ──
+  const c2State = { qty: 1, size: 'M', color: 'Amarelo', basePrice: 114.55, delivery: 'standard', payment: 'pix', coupon: null, oneClick: false };
+
+  function c2Fmt(val) { return 'R$ ' + val.toFixed(2).replace('.', ','); }
+
+  function c2Calc() {
+    let t = c2State.basePrice * c2State.qty;
+    if (c2State.delivery === 'express') t += 19.90;
+    if (c2State.payment === 'pix') t *= 0.95;
+    if (c2State.coupon) t -= 11.46;
+    return Math.max(t, 0);
+  }
+
+  function c2UpdateUI() {
+    const sub = c2State.basePrice * c2State.qty;
+    const tot = c2Calc();
+    const fmtTot = c2Fmt(tot);
+    ['c2-total','c2-addr-total','c2-addr-ftotal','c2-pay-total','c2-pay-ftotal','rev-total','rev-ftotal','c1k-price','c1k-paytotal','c1k-footer-total'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.textContent = fmtTot;
+    });
+    // 1-click screen item info
+    ['c1k-color'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.color; });
+    ['c1k-size'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.size; });
+    ['c1k-qty'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.qty; });
+    const pd = document.getElementById('c2-price-display'); if (pd) pd.textContent = c2Fmt(sub);
+    const pp = document.getElementById('c2-pix-preview'); if (pp) pp.textContent = c2Fmt(sub * (c2State.payment==='pix'?0.95:1));
+    const ps = document.getElementById('c2-pay-sub'); if (ps) ps.textContent = c2Fmt(sub);
+    const ql = document.getElementById('c2-qty-lbl'); if (ql) ql.textContent = c2State.qty;
+    ['c2-cpn-row','c2-cpn-row2','rev-cpn-row'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display = c2State.coupon?'flex':'none'; });
+    ['c2-pix-disc-row','rev-pix-disc'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display = c2State.payment==='pix'?'flex':'none'; });
+    if (c2State.coupon) {
+      ['c2-cpn-lbl2','c2-cpn-lbl3'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent = c2State.coupon.code; });
+    }
+    const dr = document.getElementById('c2-delivery-row');
+    if (dr) dr.innerHTML = c2State.delivery==='express' ? '<span>Frete Expresso</span><span>R$ 19,90</span>' : '<span>Frete</span><span class="shein-sav">Grátis</span>';
+    const revDel = document.getElementById('rev-delivery');
+    if (revDel) revDel.innerHTML = c2State.delivery==='express' ? '🚚 Expresso · R$ 19,90 · 3-5 dias úteis' : '🚚 Padrão · Grátis · 5-12 dias úteis';
+    const rdc = document.getElementById('rev-delivery-cost');
+    if (rdc) rdc.innerHTML = c2State.delivery==='express' ? '<span>Frete Expresso</span><span>R$ 19,90</span>' : '<span>Frete</span><span class="shein-sav">Grátis</span>';
+    const revTot = document.getElementById('rev-total'); if (revTot) revTot.textContent = fmtTot;
+    const revP = document.getElementById('rev-price'); if (revP) revP.textContent = c2Fmt(sub);
+    const revPay = document.getElementById('rev-payment');
+    if (revPay) { const lbl = {pix:'💠 Pix (5% de desconto)',card:'💳 Cartão de Crédito',boleto:'📄 Boleto Bancário'}; revPay.textContent = lbl[c2State.payment]||c2State.payment; }
+  }
+
+  function c2Size(el, size) {
+    c2State.size = size;
+    document.querySelectorAll('#mockup-c2 .shein-sz').forEach(e => e.classList.remove('on'));
+    el.classList.add('on');
+    const l = document.getElementById('c2-size-lbl'); if(l) l.textContent = size;
+    const r = document.getElementById('rev-size'); if(r) r.textContent = size;
+    c2Toast('Tamanho: ' + size);
+  }
+
+  function c2Color(el, color) {
+    c2State.color = color;
+    document.querySelectorAll('#mockup-c2 .shein-clr').forEach(e => e.classList.remove('on'));
+    el.classList.add('on');
+    const l = document.getElementById('c2-color-lbl'); if(l) l.textContent = color;
+    const r = document.getElementById('rev-color'); if(r) r.textContent = color;
+    c2Toast('Cor selecionada: ' + color);
+  }
+
+  function c2Qty(delta) {
+    const next = Math.max(1, Math.min(3, c2State.qty + delta));
+    if (next === c2State.qty) { if (delta > 0) c2Toast('Máximo: 3 unidades'); return; }
+    c2State.qty = next;
+    const el = document.getElementById('c2-qty'); if(el) el.textContent = next;
+    const r = document.getElementById('rev-qty'); if(r) r.textContent = next;
+    c2UpdateUI();
+  }
+
+  function c2OpenCpn() {
+    document.getElementById('c2-cpnpop')?.classList.add('vis');
+    document.getElementById('c2-overlay')?.classList.add('vis');
+  }
+  function c2CloseCpn() {
+    document.getElementById('c2-cpnpop')?.classList.remove('vis');
+    document.getElementById('c2-overlay')?.classList.remove('vis');
+  }
+  function c2ApplyCpn(code, label) {
+    c2State.coupon = {code, label};
+    c2CloseCpn();
+    const txt = document.getElementById('c2-cpn-txt');
+    if (txt) txt.innerHTML = '<span class="shein-cpn-applied2">✓ ' + code + ' — ' + label + '</span>';
+    c2UpdateUI();
+    c2Toast('Cupom ' + code + ' aplicado!');
+  }
+  function c2ApplyCpnInput() {
+    const inp = document.getElementById('c2-cpn-input');
+    if (!inp) return;
+    const code = inp.value.toUpperCase().trim();
+    if (code === 'SHEIN10') c2ApplyCpn('SHEIN10','10% de desconto');
+    else if (code === 'FRETE0') c2ApplyCpn('FRETE0','Frete grátis');
+    else if (code) c2Toast('Cupom inválido ou expirado');
+  }
+
+  function c2SelectDelivery(mode, el) {
+    c2State.delivery = mode;
+    document.querySelectorAll('#mockup-c2 .shein-dopt2').forEach(e => e.classList.remove('on'));
+    el.classList.add('on');
+    c2UpdateUI();
+    c2Toast(mode==='express' ? 'Entrega Expressa selecionada' : 'Entrega Padrão selecionada');
+  }
+
+  function c2SelectPay(el, method) {
+    c2State.payment = method;
+    ['c2-pay-pix','c2-pay-card','c2-pay-boleto'].forEach(id => {
+      const opt = document.getElementById(id); if (!opt) return;
+      opt.classList.remove('on');
+      const radio = opt.querySelector('[id^="c2-radio"]');
+      if (radio) { radio.style.borderColor = '#ddd'; radio.innerHTML = ''; }
+    });
+    el.classList.add('on');
+    const radio = el.querySelector('[id^="c2-radio"]');
+    if (radio) { radio.style.borderColor = '#e8427c'; radio.innerHTML = '<div style="width:7px;height:7px;background:#e8427c;border-radius:50%;"></div>'; }
+    c2UpdateUI();
+  }
+
+  function c2Toggle1Click(el) {
+    // Payment screen toggle (preference only)
+    const tgl = document.getElementById('c2-1clk-tgl');
+    if (tgl) tgl.classList.toggle('on');
+    c2Toast('Preferência atualizada');
+  }
+
+  function c2Toggle1ClickCart() {
+    c2State.oneClick = !c2State.oneClick;
+    const section = document.getElementById('c2-1click-section');
+    const tgl = document.getElementById('c2-cart-tgl');
+    const btn = document.getElementById('c2-checkout-btn');
+    if (section) section.classList.toggle('on', c2State.oneClick);
+    if (tgl) tgl.classList.toggle('on', c2State.oneClick);
+    if (btn) {
+      if (c2State.oneClick) {
+        btn.textContent = '⚡ Comprar em 1 Clique';
+        btn.classList.add('pink2');
+      } else {
+        btn.textContent = 'Continuar Compra';
+        btn.classList.remove('pink2');
+      }
+    }
+    if (c2State.oneClick) c2Toast('1 Clique ativado — dados pré-preenchidos!');
+    else c2Toast('1 Clique desativado');
+  }
+
+  function c2Checkout() {
+    c2UpdateUI();
+    if (c2State.oneClick) {
+      goToStep('step-1click-c2');
+    } else {
+      goToStep('step-address-c2');
+    }
+  }
+
+  function c2GoManual() {
+    // Desativa 1-clique e vai para fluxo manual
+    c2State.oneClick = false;
+    const section = document.getElementById('c2-1click-section');
+    const tgl = document.getElementById('c2-cart-tgl');
+    const btn = document.getElementById('c2-checkout-btn');
+    if (section) section.classList.remove('on');
+    if (tgl) tgl.classList.remove('on');
+    if (btn) { btn.textContent = 'Continuar Compra'; btn.classList.remove('pink2'); }
+    goToStep('step-address-c2');
+  }
+
+  function c2Toast(msg) {
+    const t = document.getElementById('c2-toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('vis');
+    clearTimeout(t._tid);
+    t._tid = setTimeout(() => t.classList.remove('vis'), 2200);
+  }
+
+  function c2PlaceOrder() {
+    goToStep('step-success-c2');
+    const dd = document.getElementById('c2-delivery-date-final');
+    if (dd) dd.textContent = c2State.delivery==='express' ? 'Prev. 22–24 mai' : 'Prev. 28 mai – 8 jun';
+    const pb = document.getElementById('c2-pix-block'); if (pb) pb.style.display = c2State.payment==='pix' ? 'block' : 'none';
+    const ps2 = document.getElementById('c2-pay-method-status');
+    const statusMap = {pix:'Pix — confirma em minutos', card:'Cartão — aguardando aprovação', boleto:'Boleto — prazo de 2 dias úteis'};
+    if (ps2) ps2.textContent = statusMap[c2State.payment] || '';
+  }
+
+  function c2RestartProto() {
+    c2State.qty=1; c2State.size='M'; c2State.color='Amarelo'; c2State.delivery='standard'; c2State.payment='pix'; c2State.coupon=null; c2State.oneClick=false;
+    const s2 = document.getElementById('c2-1click-section'); if(s2) s2.classList.remove('on');
+    const t2 = document.getElementById('c2-cart-tgl'); if(t2) t2.classList.remove('on');
+    const b2 = document.getElementById('c2-checkout-btn'); if(b2){ b2.textContent='Continuar Compra'; b2.classList.remove('pink2'); }
+    goToStep('step-cart-c2');
+    document.querySelectorAll('#mockup-c2 .shein-sz').forEach(e => e.classList.remove('on'));
+    const mEl = document.querySelector('#mockup-c2 .shein-sz:nth-child(3)'); if(mEl) mEl.classList.add('on');
+    document.querySelectorAll('#mockup-c2 .shein-clr').forEach((e,i) => e.classList.toggle('on', i===0));
+    const qEl = document.getElementById('c2-qty'); if(qEl) qEl.textContent='1';
+    const cpnTxt = document.getElementById('c2-cpn-txt'); if(cpnTxt) cpnTxt.textContent='Adicionar cupom de desconto';
+    const cpnInp = document.getElementById('c2-cpn-input'); if(cpnInp) cpnInp.value='';
+    const sl = document.getElementById('c2-size-lbl'); if(sl) sl.textContent='M';
+    const cl = document.getElementById('c2-color-lbl'); if(cl) cl.textContent='Amarelo';
+    document.getElementById('c2-1clk-tgl')?.classList.remove('on');
+    const stdOpt = document.getElementById('c2-dopt-std'); if(stdOpt) c2SelectDelivery('standard', stdOpt);
+    const pixOpt = document.getElementById('c2-pay-pix'); if(pixOpt) c2SelectPay(pixOpt, 'pix');
+    c2UpdateUI();
+  }
+
+  // Flash sale countdown
+  (function() {
+    let h=0, m=23, s=47;
+    const pad = n => String(n).padStart(2,'0');
+    setInterval(() => {
+      if(s>0){s--;}else if(m>0){m--;s=59;}else if(h>0){h--;m=59;s=59;}
+      const th=document.getElementById('c2-th'); const tm=document.getElementById('c2-tm'); const ts=document.getElementById('c2-ts');
+      if(th)th.textContent=pad(h); if(tm)tm.textContent=pad(m); if(ts)ts.textContent=pad(s);
+    }, 1000);
+  })();
 </script>
 
 </body>
