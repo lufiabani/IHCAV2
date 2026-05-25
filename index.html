@@ -1114,6 +1114,12 @@
   .shein-inp2:focus { border-color: #e8427c; }
   .shein-inp2-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
 
+  .shein-1clk { background: white; border-radius: 7px; padding: 10px 12px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px; }
+  .shein-tgl2 { width: 40px; height: 22px; background: #ddd; border-radius: 11px; position: relative; transition: background 0.2s; flex-shrink: 0; }
+  .shein-tgl2.on { background: #e8427c; }
+  .shein-tgl2::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: left 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  .shein-tgl2.on::after { left: 20px; }
+
   .btn-shein { background: #1a1a1a; color: white; border: none; padding: 13px; border-radius: 5px; font-weight: 800; font-size: 0.9rem; width: 100%; cursor: pointer; font-family: var(--font); transition: background 0.15s; }
   .btn-shein:hover { background: #333; }
   .btn-shein.pink2 { background: #e8427c; }
@@ -1235,6 +1241,41 @@
   .shein-bnav-item.bnav-on .shein-bnav-lbl { color: #e8427c; }
   .shein-bnav-badge { position: absolute; top: -3px; right: calc(50% - 14px); background: #e8427c; color: white; font-size: 0.5rem; font-weight: 800; border-radius: 50%; width: 12px; height: 12px; display: flex; align-items: center; justify-content: center; }
   .shein-bnav-logo { font-size: 0.62rem; font-weight: 900; color: #1a1a1a; letter-spacing: 1.5px; font-family: 'Arial Black', sans-serif; padding: 3px 6px; background: #f5f5f5; border-radius: 4px; display: inline-block; margin-bottom: 2px; }
+
+  /* ── 1-CLICK SECTION (CART) ── */
+  .shein-1click-cart {
+    background: white; border-radius: 8px;
+    border: 1.5px solid #eee; padding: 12px 14px;
+    margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
+  }
+  .shein-1click-cart.on { border-color: #e8427c; background: linear-gradient(135deg, #fff5f9, #fff); }
+  .shein-1click-cart-hdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .shein-1click-badge { background: #e8427c; color: white; font-size: 0.55rem; font-weight: 800; padding: 2px 6px; border-radius: 99px; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .shein-1click-preview { display: none; padding-top: 10px; margin-top: 10px; border-top: 1px dashed #fce4ef; }
+  .shein-1click-cart.on .shein-1click-preview { display: block; }
+  .shein-1click-data { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: 0.72rem; }
+  .shein-1click-data:last-child { margin-bottom: 0; }
+
+  /* ── 1-CLICK FAST CONFIRM SCREEN ── */
+  .shein-confirm-hero {
+    background: linear-gradient(135deg, #fff0f5, #fce4ef);
+    border-radius: 10px; padding: 16px 14px; margin-bottom: 12px;
+    text-align: center; border: 1px solid #fce4ef;
+  }
+  .shein-confirm-card { background: white; border-radius: 8px; padding: 12px 14px; border: 1px solid #eee; margin-bottom: 10px; }
+  .shein-confirm-card-ttl { font-size: 0.62rem; font-weight: 800; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+
+  /* ── PROMO BANNER ── */
+  .shein-promo-banner {
+    background: linear-gradient(135deg, #e8427c, #c0185a);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    overflow: hidden; position: relative;
+  }
+  .shein-promo-banner::after { content: ''; position: absolute; right: -15px; top: -15px; width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+  .shein-promo-hl { font-size: 1rem; font-weight: 900; color: white; line-height: 1.1; font-family: 'Arial Black', sans-serif; }
+  .shein-promo-sub { font-size: 0.62rem; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 1px; }
+  .shein-promo-cta { margin-left: auto; background: white; color: #e8427c; font-size: 0.62rem; font-weight: 800; padding: 4px 10px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; z-index: 1; }
 
   /* ── CANCEL BUTTON ── */
   .btn-shein-cancel {
@@ -1841,7 +1882,7 @@
             <p style="font-size:0.85rem; color:var(--text-light); text-align:center; margin-bottom:24px;">Seu código Pix foi gerado com sucesso. O pedido <strong>#8924103</strong> já está registrado em sua conta.</p>
             
             <div class="summary-card" style="width:100%; text-align:center; border:2px dashed var(--gray-mid); background:var(--gray-light);">
-              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjBIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjB2MjBIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
               <div class="btn-primary" style="font-size:0.8rem; padding:10px;">Copiar Código Pix</div>
             </div>
           </div>
@@ -1921,6 +1962,7 @@
     <h3 class="wiki-subtitle">O que orientou o refinamento</h3>
     <div class="feedback-pills">
       <span class="feedback-pill">Arthur — agrupamento na revisão</span>
+      <span class="feedback-pill">Arthur/Theo — checkout rápido mais claro</span>
       <span class="feedback-pill">Felipe — persona operacional (Ana Paula)</span>
       <span class="feedback-pill">Diva/Artur — etapas e CTAs transparentes (P4)</span>
     </div>
@@ -1938,8 +1980,14 @@
         <tr>
           <td><strong>P4 e P1</strong> · Modelo mental BR<br><em>(Diva, Artur, H1)</em></td>
           <td>O botão "Continuar Compra" não deixa claro qual é a próxima ação, além de induzir ao erro. O usuário também precisa saber em qual etapa está.</td>
-          <td>Substituímos o botão por "Avançar para Entrega" e inserimos uma barra de progresso fixa.</td>
+          <td>Substituímos o botão por "Avançar para Entrega" (ou equivalente para o checkout de 1 clique) e inserimos uma barra de progresso fixa.</td>
           <td>Componente <code>progress-bar-ui</code> para etapas, mudança textual no botão principal, e <span class="fix-badge">Corrige P1/P4</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>P3</strong> · Adaptabilidade<br><em>(Arthur, Theo, 3.8)</em></td>
+          <td>"Modo Checkout Rápido" gerou dúvida e estava escondido na revisão/pagamento; falta rota ágil desde o início.</td>
+          <td>O recurso foi movido direto para o <strong>Carrinho</strong> e renomeado para <strong>"Comprar com 1 clique"</strong>.</td>
+          <td>Card dedicado na etapa 1 (Carrinho) com preview de dados salvos. <span class="fix-badge">Corrige P3</span>.</td>
         </tr>
         <tr>
           <td><strong>P2</strong> · Gestão de erros<br><em>(Arthur — agrupamento)</em></td>
@@ -1960,7 +2008,7 @@
 
     <div class="proto-change-card">
       <h4>1. Cenário de uso da persona <span class="fix-badge">Ana Paula</span></h4>
-      <p class="change-meta"><strong>Por quê:</strong> Felipe e Theo apontaram que a persona estava na análise, mas não no protótipo testável. Sem contexto, fica difícil avaliar em situação de atenção dividida.</p>
+      <p class="change-meta"><strong>Por quê:</strong> Felipe e Theo apontaram que a persona estava na análise, mas não no protótipo testável. Sem contexto, fica difícil avaliar P1 e P3 em situação de atenção dividida.</p>
       <div class="proto-compare-row">
         <div class="proto-compare-col">
           <span class="compare-tag compare-before">Ciclo 1</span>
@@ -2006,7 +2054,38 @@
     </div>
 
     <div class="proto-change-card">
-      <h4>3. Agrupamento de endereço, pagamento e itens</h4>
+      <h4>3. Checkout rápido — direto no Carrinho <span class="fix-badge">Corrige P3</span></h4>
+      <p class="change-meta"><strong>Por quê:</strong> Theo sugeriu simplificar o nome para "Comprar com 1 clique". Além disso, percebemos que deixar essa opção apenas na etapa de pagamento não trazia verdadeira agilidade. Mover a ação para a primeira etapa (Carrinho) permite pular todas as telas intermediárias, garantindo real eficiência para a usuária.</p>
+      <div class="proto-compare-row">
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-before">Ciclo 1 · Revisão/Pagamento</span>
+          <div class="compare-snapshot">
+            <div class="snap-toggle-c1">
+              <span>Modo Checkout Rápido</span>
+              <span style="width:36px;height:20px;background:var(--pink);border-radius:99px;display:inline-block;"></span>
+            </div>
+            <p style="color:var(--text-light);font-size:0.72rem;">Escondido nas etapas finais e com nome confuso.</p>
+          </div>
+        </div>
+        <div class="proto-compare-arrow">→</div>
+        <div class="proto-compare-col">
+          <span class="compare-tag compare-after">Ciclo 2 · Carrinho (1ª Etapa)</span>
+          <div class="compare-snapshot">
+            <div class="snap-toggle-c2">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span><strong>Comprar com 1 clique</strong></span>
+                <span style="width:36px;height:20px;background:var(--pink);border-radius:99px;"></span>
+              </div>
+              <span style="font-size:0.7rem;color:var(--text-light);">(Endereço e pagamento salvos) - Pule todas as etapas.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="change-how"><strong>Como foi feito:</strong> Remoção do botão na tela de pagamento e criação de um card expansível direto no Carrinho. Ao ativar, exibe um preview rápido dos dados pré-preenchidos e altera o CTA principal para confirmar a compra instantaneamente.</p>
+    </div>
+
+    <div class="proto-change-card">
+      <h4>4. Agrupamento de endereço, pagamento e itens</h4>
       <p class="change-meta"><strong>Por quê:</strong> Arthur recomendou agrupamento para distinguir blocos e reduzir equívocos na revisão — critério 3.5 (gestão de erros preventiva).</p>
       <div class="proto-compare-row">
         <div class="proto-compare-col">
@@ -2032,7 +2111,7 @@
 
     <div class="scope-box" style="margin-top:8px;">
       <div class="scope-header">📌 Síntese do Ciclo 2</div>
-      <p>O Ciclo 1 já introduzia <strong>revisão separada do pagamento</strong> e <strong>rotas de saída</strong> (voltar/cancelar). O Ciclo 2 não refaz o fluxo do zero: <strong>operacionaliza o feedback da wiki e ajusta a semântica de CTA apontada como Risco Crítico em P1/P4</strong> — torna a persona testável, explicita etapas e melhora agrupamento na revisão. O protótipo interativo completo está na seção <a href="#prototipo-ciclo-2" style="color:var(--pink-dark);font-weight:700;">2.1</a>.</p>
+      <p>O Ciclo 1 já introduzia <strong>revisão separada do pagamento</strong> e <strong>rotas de saída</strong> (voltar/cancelar). O Ciclo 2 não refaz o fluxo do zero: <strong>operacionaliza o feedback da wiki e ajusta a semântica de CTA apontada como Risco Crítico em P1/P4</strong> — torna a persona testável, explicita etapas, clarifica o atalho de compra direto na primeira etapa e melhora agrupamento na revisão. O protótipo interativo completo está na seção <a href="#prototipo-ciclo-2" style="color:var(--pink-dark);font-weight:700;">2.1</a>.</p>
     </div>
   </div>
 </section>
@@ -2127,6 +2206,46 @@
               <span style="flex:1; font-size:0.76rem; color:#333;" id="c2-cpn-txt">Adicionar cupom de desconto</span>
               <span style="color:#bbb;">›</span>
             </div>
+
+            <div class="shein-1click-cart" id="c2-1click-section" onclick="c2Toggle1ClickCart()">
+              <div class="shein-1click-cart-hdr">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.1rem;">⚡</span>
+                  <div>
+                    <div style="font-size:0.82rem; font-weight:800; color:#1a1a1a; display:flex; align-items:center; gap:6px;">
+                      Compra em 1 Clique
+                      <span class="shein-1click-badge">NOVO</span>
+                    </div>
+                    <div style="font-size:0.65rem; color:#888; margin-top:1px;">Usa seus dados salvos — pule o preenchimento</div>
+                  </div>
+                </div>
+                <div class="shein-tgl2" id="c2-cart-tgl"></div>
+              </div>
+              <div class="shein-1click-preview">
+                <div style="font-size:0.65rem; color:#e8427c; font-weight:700; margin-bottom:8px; text-align:center; letter-spacing:0.3px;">✓ DADOS PRÉ-PREENCHIDOS — só confirmar!</div>
+                <div class="shein-1click-data">
+                  <span style="font-size:0.9rem; flex-shrink:0; margin-top:1px;">📍</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.74rem; color:#1a1a1a;">Ana Paula Santos</div>
+                    <div style="font-size:0.67rem; color:#666;">Av. Central, 1200, Apto 403 B — SP</div>
+                  </div>
+                </div>
+                <div class="shein-1click-data">
+                  <span style="font-size:0.9rem; flex-shrink:0; margin-top:1px;">💳</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.74rem; color:#1a1a1a;">💠 Pix <span style="color:#16a34a; font-size:0.64rem; font-weight:600;">(5% desconto)</span></div>
+                    <div style="font-size:0.67rem; color:#666;">Pago em até 30 minutos</div>
+                  </div>
+                </div>
+                <div class="shein-1click-data">
+                  <span style="font-size:0.9rem; flex-shrink:0; margin-top:1px;">🚚</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.74rem; color:#16a34a;">Frete Grátis</div>
+                    <div style="font-size:0.67rem; color:#666;">Entrega Padrão · 28 mai – 8 jun</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="shein-cart-btm">
@@ -2182,6 +2301,69 @@
           <div class="shein-toast3" id="c2-toast"></div>
         </div>
 
+        <div id="step-1click-c2" class="proto-step">
+          <div class="shein-hdr">
+            <button class="shein-back" onclick="goToStep('step-cart-c2')">←</button>
+            <div class="shein-ttl">⚡ Confirmação Rápida</div>
+            <div style="width:28px;"></div>
+          </div>
+          <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
+            <div class="shein-confirm-hero">
+              <div style="font-size:1.6rem; margin-bottom:6px;">⚡</div>
+              <div style="font-size:0.9rem; font-weight:800; color:#e8427c; margin-bottom:3px;">Compra em 1 Clique ativada!</div>
+              <div style="font-size:0.72rem; color:#888; line-height:1.5;">Seus dados salvos foram pré-preenchidos.<br>Confira e confirme — sem distrações.</div>
+            </div>
+
+            <div class="shein-confirm-card">
+              <div class="shein-confirm-card-ttl">🛍 Seu pedido</div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <div class="shein-pimg2" style="width:52px; height:64px; font-size:1.3rem; flex-shrink:0;">👗</div>
+                <div style="flex:1;">
+                  <div class="shein-pname2" style="font-weight:600; font-size:0.75rem;">Vestido Casual Elegante de Verão</div>
+                  <div style="font-size:0.67rem; color:#888; margin:3px 0;">Cor: <span id="c1k-color">Amarelo</span> · Tam: <span id="c1k-size">M</span> · Qtd: <span id="c1k-qty">1</span></div>
+                  <div class="shein-price-n" style="font-size:0.9rem;" id="c1k-price">R$ 108,82</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="shein-confirm-card">
+              <div class="shein-confirm-card-ttl">📍 Endereço de entrega</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#1a1a1a; margin-bottom:2px;">Ana Paula Santos</div>
+              <div style="font-size:0.72rem; color:#666; line-height:1.5;">Avenida Central, 1200, Apto 403 B<br>São Paulo, SP — 01310-100</div>
+              <div style="margin-top:6px; font-size:0.7rem; color:#16a34a; font-weight:700;">🚚 Entrega Padrão · Grátis · 5–12 dias úteis</div>
+            </div>
+
+            <div class="shein-confirm-card">
+              <div class="shein-confirm-card-ttl">💳 Pagamento</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:0.8rem; font-weight:700; color:#1a1a1a;">💠 Pix</div>
+                  <div style="font-size:0.67rem; color:#16a34a; font-weight:600; margin-top:1px;">5% de desconto aplicado</div>
+                </div>
+                <div class="shein-price-n" style="font-size:0.95rem;" id="c1k-paytotal">R$ 108,82</div>
+              </div>
+            </div>
+
+            <div style="background:white; border-radius:8px; padding:9px 12px; border:1px solid #eee; margin-bottom:10px; font-size:0.69rem; color:#999; text-align:center; line-height:1.5;">
+              Ao confirmar, você aceita os <span style="color:#e8427c; font-weight:700;">Termos de Serviço</span> da SHEIN e confirma o pagamento via Pix.
+            </div>
+
+            <div style="text-align:center;">
+              <button onclick="c2GoManual()" style="background:none; border:none; font-size:0.75rem; color:#888; cursor:pointer; text-decoration:underline; font-family:var(--font); line-height:2;">
+                Prefiro preencher os dados manualmente →
+              </button>
+            </div>
+          </div>
+          <div class="shein-foot">
+            <div class="shein-foot-tot">
+              <span class="shein-foot-lbl">Total (Pix · 5% off):</span>
+              <span class="shein-foot-val" id="c1k-footer-total">R$ 108,82</span>
+            </div>
+            <button class="btn-shein pink2" onclick="c2PlaceOrder()">⚡ Confirmar Pedido</button>
+            <button class="btn-shein-cancel" onclick="c2CancelPurchase()">✕ Cancelar compra</button>
+          </div>
+        </div>
+
         <div id="step-address-c2" class="proto-step">
           <div class="shein-hdr">
             <button class="shein-back" onclick="goToStep('step-cart-c2')">←</button>
@@ -2198,6 +2380,22 @@
             <div class="shein-step"><div class="shein-step-dot">4</div>Revisão</div>
           </div>
           <div class="phone-body" style="background:#f5f5f5; padding-bottom:90px;">
+            
+            <div class="shein-1click-cart on" style="margin-bottom: 10px; cursor: pointer;" onclick="goToStep('step-1click-c2')">
+              <div class="shein-1click-cart-hdr">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.1rem;">⚡</span>
+                  <div>
+                    <div style="font-size:0.82rem; font-weight:800; color:#1a1a1a; display:flex; align-items:center; gap:6px;">
+                      Comprar em 1 clique
+                    </div>
+                    <div style="font-size:0.65rem; color:#888; margin-top:1px;">Utiliza o último endereço e método de pagamento utilizado</div>
+                  </div>
+                </div>
+                <div style="color:#e8427c; font-size:1.2rem; font-weight:bold;">›</div>
+              </div>
+            </div>
+
             <div class="shein-acard">
               <div class="shein-stitle2">📍 Endereço salvo <button class="shein-edit2" onclick="c2Toast('Edição disponível no app real')">Alterar</button></div>
               <div style="display:flex; gap:10px; align-items:flex-start;">
@@ -2636,7 +2834,7 @@
   }
 
   // ── CICLO 2 — SHEIN INTERACTIVE PROTOTYPE ──
-  const c2State = { qty: 1, size: 'M', color: 'Amarelo', basePrice: 114.55, delivery: 'standard', payment: 'pix', coupon: null };
+  const c2State = { qty: 1, size: 'M', color: 'Amarelo', basePrice: 114.55, delivery: 'standard', payment: 'pix', coupon: null, oneClick: false };
 
   function c2Fmt(val) { return 'R$ ' + val.toFixed(2).replace('.', ','); }
 
@@ -2652,10 +2850,13 @@
     const sub = c2State.basePrice * c2State.qty;
     const tot = c2Calc();
     const fmtTot = c2Fmt(tot);
-    ['c2-total','c2-addr-total','c2-addr-ftotal','c2-pay-total','c2-pay-ftotal','rev-total','rev-ftotal'].forEach(id => {
+    ['c2-total','c2-addr-total','c2-addr-ftotal','c2-pay-total','c2-pay-ftotal','rev-total','rev-ftotal','c1k-price','c1k-paytotal','c1k-footer-total'].forEach(id => {
       const el = document.getElementById(id); if (el) el.textContent = fmtTot;
     });
-    
+    // 1-click screen item info
+    ['c1k-color'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.color; });
+    ['c1k-size'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.size; });
+    ['c1k-qty'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.qty; });
     const pd = document.getElementById('c2-price-display'); if (pd) pd.textContent = c2Fmt(sub);
     const pp = document.getElementById('c2-pix-preview'); if (pp) pp.textContent = c2Fmt(sub * (c2State.payment==='pix'?0.95:1));
     const ps = document.getElementById('c2-pay-sub'); if (ps) ps.textContent = c2Fmt(sub);
@@ -2751,14 +2952,50 @@
     c2UpdateUI();
   }
 
+  function c2Toggle1ClickCart() {
+    c2State.oneClick = !c2State.oneClick;
+    const section = document.getElementById('c2-1click-section');
+    const tgl = document.getElementById('c2-cart-tgl');
+    const btn = document.getElementById('c2-checkout-btn');
+    if (section) section.classList.toggle('on', c2State.oneClick);
+    if (tgl) tgl.classList.toggle('on', c2State.oneClick);
+    if (btn) {
+      if (c2State.oneClick) {
+        btn.textContent = '⚡ Comprar em 1 Clique';
+        btn.classList.add('pink2');
+      } else {
+        btn.textContent = 'Avançar para Entrega';
+        btn.classList.remove('pink2');
+      }
+    }
+    if (c2State.oneClick) c2Toast('1 Clique ativado — dados pré-preenchidos!');
+    else c2Toast('1 Clique desativado');
+  }
+
   function c2Checkout() {
     c2UpdateUI();
-    goToStep('step-address-c2');
+    if (c2State.oneClick) {
+      goToStep('step-1click-c2');
+    } else {
+      goToStep('step-address-c2');
+    }
   }
 
   function c2CancelPurchase() {
     goToStep('step-cart-c2');
     c2Toast('Compra cancelada. Seus itens continuam no carrinho.');
+  }
+
+  function c2GoManual() {
+    // Desativa 1-clique e vai para fluxo manual
+    c2State.oneClick = false;
+    const section = document.getElementById('c2-1click-section');
+    const tgl = document.getElementById('c2-cart-tgl');
+    const btn = document.getElementById('c2-checkout-btn');
+    if (section) section.classList.remove('on');
+    if (tgl) tgl.classList.remove('on');
+    if (btn) { btn.textContent = 'Avançar para Entrega'; btn.classList.remove('pink2'); }
+    goToStep('step-address-c2');
   }
 
   function c2Toast(msg) {
@@ -2779,7 +3016,9 @@
   }
 
   function c2RestartProto() {
-    c2State.qty=1; c2State.size='M'; c2State.color='Amarelo'; c2State.delivery='standard'; c2State.payment='pix'; c2State.coupon=null;
+    c2State.qty=1; c2State.size='M'; c2State.color='Amarelo'; c2State.delivery='standard'; c2State.payment='pix'; c2State.coupon=null; c2State.oneClick=false;
+    const s2 = document.getElementById('c2-1click-section'); if(s2) s2.classList.remove('on');
+    const t2 = document.getElementById('c2-cart-tgl'); if(t2) t2.classList.remove('on');
     const b2 = document.getElementById('c2-checkout-btn'); if(b2){ b2.textContent='Avançar para Entrega'; b2.classList.remove('pink2'); }
     goToStep('step-cart-c2');
     document.querySelectorAll('#mockup-c2 .shein-sz').forEach(e => e.classList.remove('on'));
