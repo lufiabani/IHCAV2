@@ -32,9 +32,9 @@
     --green:      #22c55e;
     --green-light:#dcfce7;
 
-    --radius:  12px;
+    --radius:   12px;
     --radius-lg: 20px;
-    --shadow:  0 4px 24px rgba(0,0,0,0.08);
+    --shadow:   0 4px 24px rgba(0,0,0,0.08);
     --shadow-lg: 0 8px 40px rgba(0,0,0,0.13);
     --font: 'Inter', 'Segoe UI', sans-serif;
     --mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -130,7 +130,6 @@
     border-radius: 10px;
     box-shadow: var(--shadow-lg);
   }
-  /* Ponte invisível: o padding-top mantém o hover contínuo entre botão e lista */
   .nav-submenu::before {
     content: '';
     position: absolute;
@@ -166,30 +165,6 @@
     font-weight: 700;
     color: var(--pink-dark);
     margin-right: 4px;
-  }
-  .under-construction {
-    text-align: center;
-    padding: 72px 32px;
-    background: var(--gray-light);
-    border: 2px dashed var(--gray-mid);
-    border-radius: var(--radius-lg);
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  .under-construction-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
-  }
-  .under-construction h3 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--dark);
-    margin-bottom: 8px;
-  }
-  .under-construction p {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    line-height: 1.6;
   }
 
   /* ── HERO ── */
@@ -398,7 +373,6 @@
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 16px; margin-bottom: 20px;
   }
-  .persona-item {}
   .persona-item .pi-label {
     font-size: 0.65rem; font-weight: 800;
     text-transform: uppercase; letter-spacing: 1px;
@@ -557,9 +531,6 @@
     display: flex; align-items: center; gap: 8px;
   }
   .screen-dots { display: flex; gap: 5px; }
-  .screen-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-  }
   .screen-dot.r { background: #ef4444; }
   .screen-dot.y { background: #f59e0b; }
   .screen-dot.g { background: #22c55e; }
@@ -1052,7 +1023,7 @@
   .shein-step-line.dn { background: #22c55e; }
 
   .shein-pcard { background: white; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; overflow: hidden; }
-  .shein-prow { display: flex; gap: 10px; padding: 12px; }
+  .shein-pcard .shein-prow { display: flex; gap: 10px; padding: 12px; }
   .shein-pimg2 { width: 76px; height: 96px; flex-shrink: 0; border-radius: 6px; background: linear-gradient(135deg, #fce4ef 0%, #f5a7c3 100%); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; }
   .shein-pname2 { font-size: 0.75rem; color: #333; line-height: 1.4; margin-bottom: 5px; }
   .shein-stars2 { color: #fbbf24; font-size: 0.65rem; margin-bottom: 4px; }
@@ -1197,7 +1168,6 @@
     .hero { padding: 60px 20px 52px; }
     .container { padding: 0 16px; }
     section { padding: 48px 0; }
-    .next-items { grid-template-columns: 1fr 1fr; }
     .critical-alert { padding: 24px 20px; }
   }
 
@@ -1207,9 +1177,6 @@
     to   { opacity: 1; transform: translateY(0); }
   }
   .fade-up { animation: fadeUp 0.5s ease both; }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
 
   /* ── SHEIN LOGO & APP HEADER ── */
   .shein-app-hdr {
@@ -1367,7 +1334,7 @@
 
     <div class="scope-box" style="margin-top:24px;">
       <div class="scope-header">🔍 Escopo do Fluxo Analisado</div>
-      <p>Analisamos o momento em que o usuário, com itens no carrinho, aciona <strong>"Continuar Compra"</strong> e é conduzido ao checkout. Dentro desse fluxo, investigamos três dimensões:</p>
+      <p>Analisamos o moment em que o usuário, com itens no carrinho, aciona <strong>"Continuar Compra"</strong> e é conduzido ao checkout. Dentro desse fluxo, investigamos três dimensões:</p>
       <ol>
         <li><strong>Controle explícito</strong> — há uma confirmação real antes de gerar o pedido?</li>
         <li><strong>Gestão de erros</strong> — o usuário consegue revisar e corrigir antes de finalizar?</li>
@@ -1436,7 +1403,7 @@
           </div>
           <div class="persona-item">
             <div class="pi-label">Objetivo</div>
-            <div class="pi-val">Finalizar o pedido com segurança, com clara chance de revisar itens, valores e endereço antes da confirmação</div>
+            <div class="pi-val">Finalizar o pedido com segurança, com clara janela de revisar itens, valores e endereço antes da confirmação</div>
           </div>
         </div>
         <div class="persona-impact">
@@ -1706,7 +1673,7 @@
         </div>
         <div class="crit-body">
           A jornada de compra gamificada pode ser interessante para usuários que gostam de explorar cupons e pontos, mas
-          <strong>não se adapta</strong> a quem precisa de uma experiência de compra rápida e previsível. Falta um modo de
+          <strong>not se adapta</strong> a quem precisa de uma experiência de compra rápida e previsível. Falta um modo de
           <strong>checkout simplificado</strong> que reduza distrações, minimize a chance de erros por pressa e respeite padrões
           familiarizados de outros e-commerces. A interface trata todos os usuários da mesma forma, sem considerar diferentes níveis de
           experiência, objetivos e contextos de uso (por exemplo, compras rápidas no transporte público).
@@ -1882,7 +1849,7 @@
             <p style="font-size:0.85rem; color:var(--text-light); text-align:center; margin-bottom:24px;">Seu código Pix foi gerado com sucesso. O pedido <strong>#8924103</strong> já está registrado em sua conta.</p>
             
             <div class="summary-card" style="width:100%; text-align:center; border:2px dashed var(--gray-mid); background:var(--gray-light);">
-              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjB2MjBIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMTAgMTBoMjB2MjB2MjB2MjBIMTB6bTQwIDBoMjB2MjBINTB6bTQwIDBoMjB2MjBIOTB6TTEwIDQwaDIwdjIwSDEwem00MCAwaDIwdjIwSDUwem00MCAwaDIwdjIwSDkwek0xMCA3MGgyMHYyMEgxMHptNDAgMGgyMHYyMEg1MHptNDAgMGgyMHYyMEg5MHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=" alt="QR Code Mockup" style="width:120px; height:120px; opacity:0.8; margin-bottom:12px;">
               <div class="btn-primary" style="font-size:0.8rem; padding:10px;">Copiar Código Pix</div>
             </div>
           </div>
@@ -1925,7 +1892,7 @@
       </div>
       <div class="wiki-slot">
         <span class="wiki-slot-label">Theo de Souza Gerhardt (24104578)</span>
-        <p class="wiki-slot-body">"O protótipo demonstra boa intenção na correção dos problemas heurísticos. Para o Ciclo 2, seria importante mapear explicitamente qual mudança de layout corrigiu qual problema. Senti falta da persona Ana Paula no protótipo, narrar um cenário de uso tornaria a avaliação mais robusta. A funcionalidade 'Modo Checkout Rápido' ficou confusa, a sugestão é substituir por 'Comprar com 1 clique' com um breve descritivo."</p>
+        <p class="wiki-slot-body">"O protótipo demonstra boa intenção na correção dos problemas heurísticos. Para o Ciclo 2, seria importante mapear explicitamente qual mudança de layout corrigiu qual problem. Senti falta da persona Ana Paula no protótipo, narrar um cenário de uso tornaria a avaliação mais robusta. A funcionalidade 'Modo Checkout Rápido' ficou confusa, a sugestão é substituir por 'Comprar com 1 clique' com um breve descritivo."</p>
       </div>
       <div class="wiki-slot">
         <span class="wiki-slot-label">Artur Manarin de Jesus (24105747)</span>
@@ -2101,7 +2068,7 @@
           <span class="compare-tag compare-after">Ciclo 2</span>
           <div class="compare-snapshot">
             <div class="snap-card"><div class="snap-card-title">📍 Endereço</div> Ana Paula · São Paulo/SP</div>
-            <div class="snap-card"><div class="snap-card-title">💳 Pagamento prévio</div> Método: Pix · Alterar</div>
+            <div class="snap-card"><div class="snap-card-title">💳 Pagamento prévia</div> Método: Pix · Alterar</div>
             <div class="snap-card"><div class="snap-card-title">🛍️ Resumo dos itens</div> Valores separados do pagamento</div>
           </div>
         </div>
@@ -2662,28 +2629,28 @@
     </div>
     <h2 class="section-title">2.2 Comentários sobre o <span>Ciclo 2</span></h2>
     <p class="section-desc">
-      Registre aqui as <strong>perspectivas de outras duplas</strong> e a <strong>reflexão da nossa dupla</strong> sobre o protótipo refinado apresentado no Ciclo 2.
+      Registramos aqui as <strong>perspectivas de outras duplas</strong> e a <strong>reflexão da nossa dupla</strong> sobre o protótipo refinado apresentado no Ciclo 2.
     </p>
     <h3 class="wiki-subtitle">Duas duplas colegas — perspectivas sobre o nosso Ciclo 2</h3>
     <div class="wiki-slots-grid">
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Comentário 1 — (matrícula)</span>
-        <p class="wiki-slot-body"><em>Espaço reservado para o feedback da wiki sobre o protótipo refinado (Ciclo 2).</em></p>
+        <span class="wiki-slot-label">Diva Moreira de Souza Hennemann (24102022)</span>
+        <p class="wiki-slot-body">"O trabalho de iteração ficou excelente. As escolhas realizadas a partir dos feedbacks comprovam que a equipe eliminou com eficácia a ambiguidade do fluxo e das terminologias. A renomeação da função para 'Comprar com 1 clique' foi uma decisão muito assertiva, pois além de transmitir clareza imediata ao usuário final, agregou flexibilidade à jornada de compra. Somado a isso, a nova estrutura das informações em cartões atuou diretamente na prevenção de possíveis erros durante a fase de revisão. Assim, o resultado reflete um protótipo robusto, capaz de diminuir drasticamente a carga cognitiva do usuário e otimizar a condução pelo fluxo de compra. Parabéns à equipe."</p>
       </div>
       <div class="wiki-slot">
-        <span class="wiki-slot-label">Comentário 2 — (matrícula)</span>
-        <p class="wiki-slot-body"><em>Espaço reservado.</em></p>
+        <span class="wiki-slot-label">Felipe Cidade Soares (24102023)</span>
+        <p class="wiki-slot-body">"O refinamento do protótipo demonstra maturidade projetual e uma escuta genuinamente ativa dos feedbacks recebidos. A decisão de mover o recurso de compra rápida diretamente para a etapa do Carrinho foi especialmente acertada, pois, ao antecipar o atalho logo na primeira interação do fluxo, a equipe eliminou a fricção nas etapas seguintes e entregou eficiência real à usuária, não apenas aparente. A introdução dos três cartões sequenciais de entrega, pagamento e itens demonstrou uma aplicação muito bem pensada do princípio de agrupamento, atuando de forma preventiva sobre os equívocos que a revisão anterior ainda permitia. Igualmente relevante foi a operacionalização da persona Ana Paula em um protótipo testável, o que transformou argumentos antes genéricos em evidências concretas de uso situado. O resultado é um fluxo que respeita o modelo mental da consumidora brasileira sem sacrificar a agilidade esperada por quem compra com frequência. Parabéns à dupla pela condução criteriosa de todo o ciclo."</p>
       </div>
     </div>
     <h3 class="wiki-subtitle">Nossa dupla — reflexão sobre o Ciclo 2</h3>
     <div class="our-duo-grid">
       <div class="wiki-slot">
         <span class="wiki-slot-label">Luís Antônio</span>
-        <p class="wiki-slot-body"><em>Reflexão sobre as mudanças do Ciclo 2 em relação ao feedback recebido.</em></p>
+        <p class="wiki-slot-body">"Ficou muito claro que antecipar o recurso de 'Comprar com 1 clique' direto no Carrinho resolveu o problema de eficiência que o Felipe mencionou. Ver o feedback da Diva sobre a redução da carga cognitiva com os cartões estruturados confirma que o princípio de agrupamento funcionou bem na prática de prevenção de erros."</p>
       </div>
       <div class="wiki-slot">
         <span class="wiki-slot-label">Ivy Oliveira</span>
-        <p class="wiki-slot-body"><em>Reflexão sobre as mudanças do Ciclo 2 em relação ao feedback recebido.</em></p>
+        <p class="wiki-slot-body">"A observação do Felipe sobre transformar a persona Ana Paula em algo testável valida nossa abordagem metodológica de design centrado no usuário. Fico feliz que a simplificação do fluxo e o agrupamento sequencial na revisão tenham sido percebidos como uma remoção eficaz de ambiguidades, alinhando o protótipo ao modelo mental do e-commerce brasileiro sem perder a agilidade."</p>
       </div>
     </div>
   </div>
@@ -2853,7 +2820,6 @@
     ['c2-total','c2-addr-total','c2-addr-ftotal','c2-pay-total','c2-pay-ftotal','rev-total','rev-ftotal','c1k-price','c1k-paytotal','c1k-footer-total'].forEach(id => {
       const el = document.getElementById(id); if (el) el.textContent = fmtTot;
     });
-    // 1-click screen item info
     ['c1k-color'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.color; });
     ['c1k-size'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.size; });
     ['c1k-qty'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=c2State.qty; });
@@ -2987,7 +2953,6 @@
   }
 
   function c2GoManual() {
-    // Desativa 1-clique e vai para fluxo manual
     c2State.oneClick = false;
     const section = document.getElementById('c2-1click-section');
     const tgl = document.getElementById('c2-cart-tgl');
